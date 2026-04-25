@@ -77,7 +77,6 @@
     background-color: var(--color-background);
     color: var(--color-on-background);
     font-family: 'Inter', sans-serif;
-    background-image: radial-gradient(circle at 50% -20%, #1a2a44 0%, #050507 70%);
   }
 }
 

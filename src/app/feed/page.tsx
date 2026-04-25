@@ -172,29 +172,42 @@ const Sparkline = ({ data, color }: { data: number[], color: string }) => {
 };
 
 export default function FeedPage() {
-  const [recentCategories, setRecentCategories] = useState<string[]>([]);
+  const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
   const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
     setIsClient(true);
-    const saved = localStorage.getItem('recentCategories');
+    const saved = localStorage.getItem('feedSelectedCategories');
     if (saved) {
-      setRecentCategories(JSON.parse(saved));
+      setSelectedCategories(JSON.parse(saved));
     }
   }, []);
 
   const handleCategoryClick = (category: string) => {
-    let newRecents = [category, ...recentCategories.filter(c => c !== category)].slice(0, 5);
-    setRecentCategories(newRecents);
-    localStorage.setItem('recentCategories', JSON.stringify(newRecents));
+    let newSelected: string[] = [];
+    if (category === 'all') {
+      newSelected = [];
+    } else {
+      if (selectedCategories.includes(category)) {
+        newSelected = selectedCategories.filter(c => c !== category);
+      } else {
+        newSelected = [...selectedCategories, category];
+      }
+    }
+    setSelectedCategories(newSelected);
+    localStorage.setItem('feedSelectedCategories', JSON.stringify(newSelected));
   };
 
   const allCategories = Array.from(new Set(mockData.map(d => d.category)));
 
   // Data subsets
-  const scandals = mockData.filter(d => (d.officialRating - d.adjustedRating) > 1.5);
-  const clean = mockData.filter(d => d.integrityScore > 90);
-  const others = mockData.filter(d => (d.officialRating - d.adjustedRating) <= 1.5 && d.integrityScore <= 90);
+  const activeData = selectedCategories.length > 0
+    ? mockData.filter(d => selectedCategories.includes(d.category))
+    : mockData;
+
+  const scandals = activeData.filter(d => (d.officialRating - d.adjustedRating) > 1.5);
+  const clean = activeData.filter(d => d.integrityScore > 90);
+  const others = activeData.filter(d => (d.officialRating - d.adjustedRating) <= 1.5 && d.integrityScore <= 90);
 
   const getCardProps = (id: string) => {
     return {
@@ -238,14 +251,24 @@ export default function FeedPage() {
       <div className="mb-10">
         <h3 className="text-[10px] uppercase tracking-widest text-slate-500 font-bold mb-3">Market Sectors</h3>
         <div className="flex gap-3 overflow-x-auto scrollbar-hide pb-2">
+          <button
+            onClick={() => handleCategoryClick('all')}
+            className={`px-4 py-1.5 rounded-full text-xs font-bold whitespace-nowrap transition-all border ${
+              selectedCategories.length === 0 
+                ? 'bg-white/10 text-white border-white/20' 
+                : 'bg-black/40 text-slate-400 border-white/5 hover:bg-white/5'
+            }`}
+          >
+            All
+          </button>
           {allCategories.map(cat => {
-            const isRecent = recentCategories.includes(cat);
+            const isSelected = selectedCategories.includes(cat);
             return (
               <button
                 key={cat}
                 onClick={() => handleCategoryClick(cat)}
                 className={`px-4 py-1.5 rounded-full text-xs font-bold whitespace-nowrap transition-all border ${
-                  isRecent 
+                  isSelected 
                     ? 'bg-white/10 text-white border-white/20' 
                     : 'bg-black/40 text-slate-400 border-white/5 hover:bg-white/5'
                 }`}
@@ -257,17 +280,17 @@ export default function FeedPage() {
         </div>
       </div>
 
-      {/* LAYOUT GRID */}
-      <div className="grid grid-cols-1 xl:grid-cols-12 gap-8">
+      {/* SECTIONS */}
+      <div className="flex flex-col gap-12">
         
-        {/* LEFT COLUMN: Market Scandals */}
-        <div className="xl:col-span-4 flex flex-col gap-6">
+        {/* SECTION 1: Market Scandals */}
+        <section className="flex flex-col gap-6">
           <div className="flex items-center gap-2 border-b border-white/5 pb-4">
             <AlertTriangle className="text-error w-5 h-5" />
             <h2 className="text-lg font-bold text-white uppercase tracking-wider">Market Scandals</h2>
           </div>
           
-          <div className="flex flex-col gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
             {scandals.map(item => (
               <motion.div key={item.id} {...getCardProps(item.id)}>
                 <div className="flex justify-between items-start mb-4">
@@ -302,20 +325,17 @@ export default function FeedPage() {
               </motion.div>
             ))}
           </div>
-        </div>
+        </section>
 
-        {/* RIGHT COLUMN: Clean & Buzz */}
-        <div className="xl:col-span-8 flex flex-col gap-10">
-          
-          {/* Certified Clean */}
-          <section>
-            <div className="flex items-center gap-2 border-b border-white/5 pb-4 mb-6">
-              <ShieldCheck className="text-green-400 w-5 h-5" />
-              <h2 className="text-lg font-bold text-white uppercase tracking-wider">Certified Clean</h2>
-            </div>
+        {/* SECTION 2: Certified Clean */}
+        <section className="flex flex-col gap-6">
+          <div className="flex items-center gap-2 border-b border-white/5 pb-4">
+            <ShieldCheck className="text-green-400 w-5 h-5" />
+            <h2 className="text-lg font-bold text-white uppercase tracking-wider">Certified Clean</h2>
+          </div>
             
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {clean.map(item => (
+          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+            {clean.map(item => (
                 <motion.div key={item.id} {...getCardProps(item.id)}>
                   <div className="flex justify-between items-start mb-6">
                     <div>
@@ -342,25 +362,25 @@ export default function FeedPage() {
                     </div>
                   </div>
                   
-                  <div className="bg-black/40 rounded-lg p-4 mt-auto border border-white/5 relative flex-1">
-                    <p className="text-slate-400 italic text-sm relative z-10 leading-relaxed">
+                  <div className="mt-4 pt-4 border-t border-white/5 flex-1">
+                    <p className="text-slate-400 italic text-sm leading-relaxed">
                       "{item.humanConsensus}"
                     </p>
                   </div>
                 </motion.div>
               ))}
             </div>
-          </section>
+        </section>
 
-          {/* The Buzz (Masonry) */}
-          <section>
-            <div className="flex items-center gap-2 border-b border-white/5 pb-4 mb-6">
-              <Activity className="text-slate-300 w-5 h-5" />
-              <h2 className="text-lg font-bold text-white uppercase tracking-wider">The Buzz</h2>
-            </div>
+        {/* SECTION 3: The Buzz */}
+        <section className="flex flex-col gap-6">
+          <div className="flex items-center gap-2 border-b border-white/5 pb-4">
+            <Activity className="text-slate-300 w-5 h-5" />
+            <h2 className="text-lg font-bold text-white uppercase tracking-wider">The Buzz</h2>
+          </div>
             
-            <div className="columns-1 md:columns-2 gap-6 space-y-6">
-              {others.map(item => (
+          <div className="columns-1 md:columns-2 xl:columns-3 gap-6 space-y-6">
+            {others.map(item => (
                 <motion.div key={item.id} {...getCardProps(item.id)} className="break-inside-avoid">
                   <div className="mb-4">
                     <span className="text-[10px] uppercase tracking-widest text-slate-500 mb-1 block">{item.category}</span>
@@ -389,11 +409,9 @@ export default function FeedPage() {
                     </div>
                   </div>
                 </motion.div>
-              ))}
-            </div>
-          </section>
-
-        </div>
+            ))}
+          </div>
+        </section>
       </div>
     </main>
   );

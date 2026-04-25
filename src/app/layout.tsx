@@ -25,6 +25,10 @@ export default function RootLayout({
         <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
       </head>
       <body className="bg-background text-on-background min-h-screen flex flex-col selection:bg-primary selection:text-on-primary">
+        {/* Fixed Background */}
+        <div className="fixed inset-0 bg-[radial-gradient(circle_at_50%_-20%,#1a2a44_0%,#050507_70%)] z-[-2]"></div>
+        
+        {/* Grid Overlay */}
         <div className="fixed inset-0 grid-overlay pointer-events-none opacity-20 z-[-1]"></div>
 
         {/* TopAppBar */}
