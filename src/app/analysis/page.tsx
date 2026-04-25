@@ -314,6 +314,133 @@ export default async function AnalysisPage({ searchParams }: { searchParams: Pro
         </BentoBox>
 
       </div>
+
+      {/* False Negative / False Positive Showcase */}
+      <section className="mt-12 grid grid-cols-1 gap-[var(--spacing-bento-gap)] md:grid-cols-12">
+        <div className="glass-panel col-span-12 md:col-span-6 rounded-2xl p-8 flex flex-col overflow-hidden relative">
+          <div className="flex justify-between items-center mb-8 relative z-10">
+            <div className="flex items-center gap-4">
+              <div className="w-10 h-10 rounded-full bg-error/10 flex items-center justify-center">
+                <span className="material-symbols-outlined text-error text-xl">policy</span>
+              </div>
+              <h2 className="font-h2 text-xl font-bold text-white uppercase tracking-wider">False Negative</h2>
+            </div>
+            <div className="flex gap-3">
+              <span className="px-4 py-1.5 bg-error/10 text-error border border-error/20 font-bold text-[9px] tracking-[0.15em] rounded-full uppercase">MISSED THREATS</span>
+            </div>
+          </div>
+          <div className="flex-1 min-h-[380px] relative overflow-hidden rounded-xl border border-white/5 bg-black/40">
+            <div className="absolute top-0 left-0 right-0 h-16 bg-gradient-to-b from-[#050507] to-transparent z-10 pointer-events-none"></div>
+            <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-[#050507] to-transparent z-10 pointer-events-none"></div>
+            <div className="absolute w-full animate-scroll-vertical">
+              <div className="flex flex-col px-4 pt-4 gap-4">
+                {[
+                  { title: "CryptoWallet Pro", status: "Flagged Safe", issue: "Malware Payload Detected", time: "2m ago" },
+                  { title: "SecureVPN Ext", status: "Clean Scan", issue: "Data Exfiltration", time: "15m ago" },
+                  { title: "DefiSwap Portal", status: "No Threat", issue: "Phishing Redirect", time: "1h ago" },
+                  { title: "AuthGuard App", status: "Trusted", issue: "Credential Harvesting", time: "3h ago" }
+                ].map((item, i) => (
+                  <div key={i} className="bg-white/5 border border-white/10 rounded-lg p-4 hover:bg-white/10 transition-colors shrink-0">
+                    <div className="flex justify-between items-start mb-2">
+                      <span className="font-bold text-white font-body-sm">{item.title}</span>
+                      <span className="font-data-mono text-[10px] text-slate-500">{item.time}</span>
+                    </div>
+                    <div className="flex items-center gap-2 mb-2">
+                      <span className="px-2 py-0.5 bg-green-500/10 text-green-400 text-[10px] rounded border border-green-500/20">{item.status}</span>
+                      <span className="material-symbols-outlined text-[14px] text-slate-500">arrow_right_alt</span>
+                      <span className="px-2 py-0.5 bg-error/10 text-error text-[10px] rounded border border-error/20 font-bold">{item.issue}</span>
+                    </div>
+                    <p className="font-body-sm text-xs text-slate-400">Post-analysis revealed advanced evasion techniques bypassing initial heuristics.</p>
+                  </div>
+                ))}
+              </div>
+              <div className="flex flex-col px-4 pt-4 gap-4">
+                {[
+                  { title: "CryptoWallet Pro", status: "Flagged Safe", issue: "Malware Payload Detected", time: "2m ago" },
+                  { title: "SecureVPN Ext", status: "Clean Scan", issue: "Data Exfiltration", time: "15m ago" },
+                  { title: "DefiSwap Portal", status: "No Threat", issue: "Phishing Redirect", time: "1h ago" },
+                  { title: "AuthGuard App", status: "Trusted", issue: "Credential Harvesting", time: "3h ago" }
+                ].map((item, i) => (
+                  <div key={`dup-${i}`} className="bg-white/5 border border-white/10 rounded-lg p-4 hover:bg-white/10 transition-colors shrink-0">
+                    <div className="flex justify-between items-start mb-2">
+                      <span className="font-bold text-white font-body-sm">{item.title}</span>
+                      <span className="font-data-mono text-[10px] text-slate-500">{item.time}</span>
+                    </div>
+                    <div className="flex items-center gap-2 mb-2">
+                      <span className="px-2 py-0.5 bg-green-500/10 text-green-400 text-[10px] rounded border border-green-500/20">{item.status}</span>
+                      <span className="material-symbols-outlined text-[14px] text-slate-500">arrow_right_alt</span>
+                      <span className="px-2 py-0.5 bg-error/10 text-error text-[10px] rounded border border-error/20 font-bold">{item.issue}</span>
+                    </div>
+                    <p className="font-body-sm text-xs text-slate-400">Post-analysis revealed advanced evasion techniques bypassing initial heuristics.</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="glass-panel col-span-12 md:col-span-6 rounded-2xl p-8 flex flex-col overflow-hidden relative">
+          <div className="flex justify-between items-center mb-8 relative z-10">
+            <div className="flex items-center gap-4">
+              <div className="w-10 h-10 rounded-full bg-green-500/10 flex items-center justify-center">
+                <span className="material-symbols-outlined text-green-500 text-xl">verified_user</span>
+              </div>
+              <h2 className="font-h2 text-xl font-bold text-white uppercase tracking-wider">False Positive</h2>
+            </div>
+            <div className="flex gap-3">
+              <span className="px-4 py-1.5 bg-green-500/10 text-green-400 border border-green-500/20 font-bold text-[9px] tracking-[0.15em] rounded-full uppercase">WRONGFULLY FLAGGED</span>
+            </div>
+          </div>
+          <div className="flex-1 min-h-[380px] relative overflow-hidden rounded-xl border border-white/5 bg-black/40">
+            <div className="absolute top-0 left-0 right-0 h-16 bg-gradient-to-b from-[#050507] to-transparent z-10 pointer-events-none"></div>
+            <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-[#050507] to-transparent z-10 pointer-events-none"></div>
+            <div className="absolute w-full animate-scroll-vertical">
+              <div className="flex flex-col px-4 pt-4 gap-4">
+                {[
+                  { title: "IndieGame Studio", status: "Blocked", resolution: "Verified Authentic", time: "10m ago" },
+                  { title: "CharityFund DAO", status: "High Risk", resolution: "Legitimate Entity", time: "45m ago" },
+                  { title: "LocalNews Blog", status: "Bot Activity", resolution: "Organic Viral Traffic", time: "2h ago" },
+                  { title: "ArtisanMarket", status: "Scam Warning", resolution: "Secure Transactions", time: "5h ago" }
+                ].map((item, i) => (
+                  <div key={i} className="bg-white/5 border border-white/10 rounded-lg p-4 hover:bg-white/10 transition-colors shrink-0">
+                    <div className="flex justify-between items-start mb-2">
+                      <span className="font-bold text-white font-body-sm">{item.title}</span>
+                      <span className="font-data-mono text-[10px] text-slate-500">{item.time}</span>
+                    </div>
+                    <div className="flex items-center gap-2 mb-2">
+                      <span className="px-2 py-0.5 bg-error/10 text-error text-[10px] rounded border border-error/20">{item.status}</span>
+                      <span className="material-symbols-outlined text-[14px] text-slate-500">arrow_right_alt</span>
+                      <span className="px-2 py-0.5 bg-green-500/10 text-green-400 text-[10px] rounded border border-green-500/20 font-bold">{item.resolution}</span>
+                    </div>
+                    <p className="font-body-sm text-xs text-slate-400">Manual review and extended behavioral context confirmed legitimate operations.</p>
+                  </div>
+                ))}
+              </div>
+              <div className="flex flex-col px-4 pt-4 gap-4">
+                {[
+                  { title: "IndieGame Studio", status: "Blocked", resolution: "Verified Authentic", time: "10m ago" },
+                  { title: "CharityFund DAO", status: "High Risk", resolution: "Legitimate Entity", time: "45m ago" },
+                  { title: "LocalNews Blog", status: "Bot Activity", resolution: "Organic Viral Traffic", time: "2h ago" },
+                  { title: "ArtisanMarket", status: "Scam Warning", resolution: "Secure Transactions", time: "5h ago" }
+                ].map((item, i) => (
+                  <div key={`dup-${i}`} className="bg-white/5 border border-white/10 rounded-lg p-4 hover:bg-white/10 transition-colors shrink-0">
+                    <div className="flex justify-between items-start mb-2">
+                      <span className="font-bold text-white font-body-sm">{item.title}</span>
+                      <span className="font-data-mono text-[10px] text-slate-500">{item.time}</span>
+                    </div>
+                    <div className="flex items-center gap-2 mb-2">
+                      <span className="px-2 py-0.5 bg-error/10 text-error text-[10px] rounded border border-error/20">{item.status}</span>
+                      <span className="material-symbols-outlined text-[14px] text-slate-500">arrow_right_alt</span>
+                      <span className="px-2 py-0.5 bg-green-500/10 text-green-400 text-[10px] rounded border border-green-500/20 font-bold">{item.resolution}</span>
+                    </div>
+                    <p className="font-body-sm text-xs text-slate-400">Manual review and extended behavioral context confirmed legitimate operations.</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
     </main>
   );
 }
