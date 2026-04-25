@@ -1,7 +1,10 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { Sidebar } from "@/components/ui/Sidebar";
+<<<<<<< Updated upstream
 import Link from "next/link";
+=======
+>>>>>>> Stashed changes
 import HeaderProfile from "@/components/HeaderProfile";
 import "./globals.css";
 

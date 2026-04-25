@@ -65,9 +65,16 @@ export default function Home() {
               </div>
             </div>
             
+<<<<<<< Updated upstream
             <div className="flex-1 min-h-[380px] relative overflow-hidden rounded-xl border border-white/5 bg-black/40">
               <div className="absolute top-0 left-0 right-0 h-16 bg-gradient-to-b from-[#050507] to-transparent z-10 pointer-events-none"></div>
               <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-[#050507] to-transparent z-10 pointer-events-none"></div>
+=======
+            <div className="flex-1 h-[380px] relative rounded-xl border border-white/5 bg-black/40 overflow-hidden">
+              <div className="absolute top-0 left-0 right-0 h-12 bg-gradient-to-b from-[#050507] to-transparent z-10 pointer-events-none"></div>
+              <div className="absolute bottom-0 left-0 right-0 h-12 bg-gradient-to-t from-[#050507] to-transparent z-10 pointer-events-none"></div>
+              
+>>>>>>> Stashed changes
               <AutoScrollFeed items={falseNegatives} feedType="negative" />
             </div>
           </div>
@@ -86,9 +93,16 @@ export default function Home() {
               </div>
             </div>
             
+<<<<<<< Updated upstream
             <div className="flex-1 min-h-[380px] relative overflow-hidden rounded-xl border border-white/5 bg-black/40">
               <div className="absolute top-0 left-0 right-0 h-16 bg-gradient-to-b from-[#050507] to-transparent z-10 pointer-events-none"></div>
               <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-[#050507] to-transparent z-10 pointer-events-none"></div>
+=======
+            <div className="flex-1 h-[380px] relative rounded-xl border border-white/5 bg-black/40 overflow-hidden">
+              <div className="absolute top-0 left-0 right-0 h-12 bg-gradient-to-b from-[#050507] to-transparent z-10 pointer-events-none"></div>
+              <div className="absolute bottom-0 left-0 right-0 h-12 bg-gradient-to-t from-[#050507] to-transparent z-10 pointer-events-none"></div>
+              
+>>>>>>> Stashed changes
               <AutoScrollFeed items={falsePositives} feedType="positive" />
             </div>
           </div>

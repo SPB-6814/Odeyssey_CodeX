@@ -27,13 +27,13 @@ export default function AuthPage() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (isLogin && isValidLogin) {
-      // Mock login success: extract name from email or use default
       const mockName = email.split('@')[0] || "Analyst";
       localStorage.setItem("userName", mockName);
+      localStorage.setItem("userEmail", email);
       router.push("/");
     } else if (!isLogin && isValidSignup) {
-      // Mock signup success
       localStorage.setItem("userName", name);
+      localStorage.setItem("userEmail", email);
       router.push("/");
     }
   };
