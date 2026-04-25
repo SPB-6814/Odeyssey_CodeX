@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 "use client";
 import React, { useEffect, useRef } from "react";
 
@@ -24,6 +25,17 @@ export default function Home() {
     loop();
     return () => cancelAnimationFrame(animationId);
   }, []);
+=======
+import { falseNegativePool, falsePositivePool, cleanReviewPool, getRandomItems } from "@/lib/mockData";
+import AutoScrollFeed from "@/components/AutoScrollFeed";
+
+export const dynamic = "force-dynamic";
+
+export default function Home() {
+  const falseNegatives = getRandomItems(falseNegativePool, 4);
+  const falsePositives = getRandomItems(falsePositivePool, 4);
+  const cleanReviews = getRandomItems(cleanReviewPool, 3);
+>>>>>>> Stashed changes
 
   return (
     <>
@@ -86,6 +98,7 @@ export default function Home() {
               <div className="absolute top-0 left-0 right-0 h-12 bg-gradient-to-b from-[#050507] to-transparent z-10 pointer-events-none"></div>
               <div className="absolute bottom-0 left-0 right-0 h-12 bg-gradient-to-t from-[#050507] to-transparent z-10 pointer-events-none"></div>
               
+<<<<<<< Updated upstream
               <div ref={scrollRef1} className="h-full w-full overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
                 <div className="flex flex-col px-4 py-4 gap-2">
                   {[
@@ -113,6 +126,9 @@ export default function Home() {
                   ))}
                 </div>
               </div>
+=======
+              <AutoScrollFeed items={falseNegatives} feedType="negative" />
+>>>>>>> Stashed changes
             </div>
           </div>
 
@@ -134,6 +150,7 @@ export default function Home() {
               <div className="absolute top-0 left-0 right-0 h-12 bg-gradient-to-b from-[#050507] to-transparent z-10 pointer-events-none"></div>
               <div className="absolute bottom-0 left-0 right-0 h-12 bg-gradient-to-t from-[#050507] to-transparent z-10 pointer-events-none"></div>
               
+<<<<<<< Updated upstream
               <div ref={scrollRef2} className="h-full w-full overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
                 <div className="flex flex-col px-4 py-4 gap-2">
                   {[
@@ -161,6 +178,9 @@ export default function Home() {
                   ))}
                 </div>
               </div>
+=======
+              <AutoScrollFeed items={falsePositives} feedType="positive" />
+>>>>>>> Stashed changes
             </div>
           </div>
 
@@ -174,89 +194,34 @@ export default function Home() {
             </div>
             
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {/* Product 1 */}
-              <div className="bg-white/5 border border-white/5 rounded-2xl p-8 hover:bg-white/[0.08] transition-all cursor-pointer group flex flex-col">
-                <div className="flex items-start justify-between mb-6">
-                  <div className="w-12 h-12 rounded-xl bg-blue-500/10 flex items-center justify-center group-hover:scale-110 transition-transform">
-                    <span className="material-symbols-outlined text-blue-400 text-2xl">laptop_mac</span>
+              {cleanReviews.map((review, i) => (
+                <div key={i} className="bg-white/5 border border-white/5 rounded-2xl p-8 hover:bg-white/[0.08] transition-all cursor-pointer group flex flex-col">
+                  <div className="flex items-start justify-between mb-6">
+                    <div className={`w-12 h-12 rounded-xl ${review.iconBgClass} flex items-center justify-center group-hover:scale-110 transition-transform`}>
+                      <span className={`material-symbols-outlined ${review.iconTextClass} text-2xl`}>{review.icon}</span>
+                    </div>
+                    <div className="flex text-yellow-500">
+                      <span className="material-symbols-outlined text-sm">star</span>
+                      <span className="material-symbols-outlined text-sm">star</span>
+                      <span className="material-symbols-outlined text-sm">star</span>
+                      <span className="material-symbols-outlined text-sm">star</span>
+                      <span className="material-symbols-outlined text-sm">star</span>
+                    </div>
                   </div>
-                  <div className="flex text-yellow-500">
-                    <span className="material-symbols-outlined text-sm">star</span>
-                    <span className="material-symbols-outlined text-sm">star</span>
-                    <span className="material-symbols-outlined text-sm">star</span>
-                    <span className="material-symbols-outlined text-sm">star</span>
-                    <span className="material-symbols-outlined text-sm">star</span>
+                  <h4 className="font-h3 text-lg text-white mb-2 font-bold">{review.title}</h4>
+                  <div className="flex items-center gap-2 mb-4">
+                    <span className="px-2 py-0.5 bg-green-500/10 text-green-400 text-[10px] rounded border border-green-500/20 font-bold uppercase">100% Verified Clean</span>
                   </div>
-                </div>
-                <h4 className="font-h3 text-lg text-white mb-2 font-bold">ZenBook Pro 15</h4>
-                <div className="flex items-center gap-2 mb-4">
-                  <span className="px-2 py-0.5 bg-green-500/10 text-green-400 text-[10px] rounded border border-green-500/20 font-bold uppercase">100% Verified Clean</span>
-                </div>
-                <div className="bg-black/40 rounded-xl p-4 mt-auto border border-white/5 relative">
-                  <span className="material-symbols-outlined absolute -top-3 -left-2 text-slate-600 text-3xl opacity-50">format_quote</span>
-                  <p className="font-body-sm text-slate-300 italic text-sm relative z-10">"Exceptional build quality and no bloatware out of the box. SentinelScan shows zero bundled adware or tracking telemetry."</p>
-                  <div className="flex items-center gap-2 mt-3 pt-3 border-t border-white/5">
-                    <div className="w-5 h-5 rounded-full bg-slate-700 flex items-center justify-center text-[10px] font-bold text-white">JD</div>
-                    <span className="text-[10px] text-slate-400">Verified Tech Reviewer</span>
-                  </div>
-                </div>
-              </div>
-
-              {/* Product 2 */}
-              <div className="bg-white/5 border border-white/5 rounded-2xl p-8 hover:bg-white/[0.08] transition-all cursor-pointer group flex flex-col">
-                <div className="flex items-start justify-between mb-6">
-                  <div className="w-12 h-12 rounded-xl bg-purple-500/10 flex items-center justify-center group-hover:scale-110 transition-transform">
-                    <span className="material-symbols-outlined text-purple-400 text-2xl">router</span>
-                  </div>
-                  <div className="flex text-yellow-500">
-                    <span className="material-symbols-outlined text-sm">star</span>
-                    <span className="material-symbols-outlined text-sm">star</span>
-                    <span className="material-symbols-outlined text-sm">star</span>
-                    <span className="material-symbols-outlined text-sm">star</span>
-                    <span className="material-symbols-outlined text-sm">star</span>
+                  <div className="bg-black/40 rounded-xl p-4 mt-auto border border-white/5 relative">
+                    <span className="material-symbols-outlined absolute -top-3 -left-2 text-slate-600 text-3xl opacity-50">format_quote</span>
+                    <p className="font-body-sm text-slate-300 italic text-sm relative z-10">{review.review}</p>
+                    <div className="flex items-center gap-2 mt-3 pt-3 border-t border-white/5">
+                      <div className="w-5 h-5 rounded-full bg-slate-700 flex items-center justify-center text-[10px] font-bold text-white">{review.initials}</div>
+                      <span className="text-[10px] text-slate-400">{review.author}</span>
+                    </div>
                   </div>
                 </div>
-                <h4 className="font-h3 text-lg text-white mb-2 font-bold">NetGuard Mesh WiFi</h4>
-                <div className="flex items-center gap-2 mb-4">
-                  <span className="px-2 py-0.5 bg-green-500/10 text-green-400 text-[10px] rounded border border-green-500/20 font-bold uppercase">No Hidden Backdoors</span>
-                </div>
-                <div className="bg-black/40 rounded-xl p-4 mt-auto border border-white/5 relative">
-                  <span className="material-symbols-outlined absolute -top-3 -left-2 text-slate-600 text-3xl opacity-50">format_quote</span>
-                  <p className="font-body-sm text-slate-300 italic text-sm relative z-10">"Thoroughly audited the firmware. It's completely open-source and respects user privacy without sending traffic data to third-party servers."</p>
-                  <div className="flex items-center gap-2 mt-3 pt-3 border-t border-white/5">
-                    <div className="w-5 h-5 rounded-full bg-slate-700 flex items-center justify-center text-[10px] font-bold text-white">SA</div>
-                    <span className="text-[10px] text-slate-400">Security Analyst</span>
-                  </div>
-                </div>
-              </div>
-
-              {/* Product 3 */}
-              <div className="bg-white/5 border border-white/5 rounded-2xl p-8 hover:bg-white/[0.08] transition-all cursor-pointer group flex flex-col">
-                <div className="flex items-start justify-between mb-6">
-                  <div className="w-12 h-12 rounded-xl bg-orange-500/10 flex items-center justify-center group-hover:scale-110 transition-transform">
-                    <span className="material-symbols-outlined text-orange-400 text-2xl">account_balance_wallet</span>
-                  </div>
-                  <div className="flex text-yellow-500">
-                    <span className="material-symbols-outlined text-sm">star</span>
-                    <span className="material-symbols-outlined text-sm">star</span>
-                    <span className="material-symbols-outlined text-sm">star</span>
-                    <span className="material-symbols-outlined text-sm">star</span>
-                    <span className="material-symbols-outlined text-sm">star</span>
-                  </div>
-                </div>
-                <h4 className="font-h3 text-lg text-white mb-2 font-bold">Aegis Crypto Wallet</h4>
-                <div className="flex items-center gap-2 mb-4">
-                  <span className="px-2 py-0.5 bg-green-500/10 text-green-400 text-[10px] rounded border border-green-500/20 font-bold uppercase">Audited Smart Contracts</span>
-                </div>
-                <div className="bg-black/40 rounded-xl p-4 mt-auto border border-white/5 relative">
-                  <span className="material-symbols-outlined absolute -top-3 -left-2 text-slate-600 text-3xl opacity-50">format_quote</span>
-                  <p className="font-body-sm text-slate-300 italic text-sm relative z-10">"100% clean record. Multi-sig architecture is flawless, and the community audits show no vulnerabilities or malicious intents."</p>
-                  <div className="flex items-center gap-2 mt-3 pt-3 border-t border-white/5">
-                    <div className="w-5 h-5 rounded-full bg-slate-700 flex items-center justify-center text-[10px] font-bold text-white">MK</div>
-                    <span className="text-[10px] text-slate-400">DeFi Enthusiast</span>
-                  </div>
-                </div>
-              </div>
+              ))}
             </div>
           </div>
         </div>

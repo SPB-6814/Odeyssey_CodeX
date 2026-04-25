@@ -1,6 +1,11 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+<<<<<<< Updated upstream
 import { Sidebar } from "@/components/ui/Sidebar";
+=======
+import Link from "next/link";
+import HeaderProfile from "@/components/HeaderProfile";
+>>>>>>> Stashed changes
 import "./globals.css";
 
 const inter = Inter({
@@ -40,9 +45,7 @@ export default function RootLayout({
           </nav>
           <div className="flex items-center gap-6">
             <button className="bg-white/5 hover:bg-white/10 text-white border border-white/10 px-5 py-2 font-label-caps text-[10px] rounded-full transition-all">AUDIT URL</button>
-            <div className="w-8 h-8 rounded-full overflow-hidden border border-white/20 bg-surface-container shadow-lg shadow-black/50 ring-1 ring-white/5">
-              <img alt="Analyst profile" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCFJaeJjheWwFJPaNG221m4vRhva6BBtfsru-ugVbD5aUV2RzX0Ze04GfP6EDyALxROf-IT07KZowf_asetH_pur9rhl6B-SeN6o-3CXhGNeX0cNJDP4ssvxRFZLD6lIPYBuKlloXJBDKlCn4v7t9ddWxYccEStsWV1pwJqUVG8PY6nW5ljuF3f-hZiKEPKM3wrad9kYZ4srBSZCLqBd8HVjZXfSXqs_mWfx1ryWKRlUChSnv5EJT9WLyr7qRWf1W-0iuh7-hFSYY5V" />
-            </div>
+            <HeaderProfile />
           </div>
         </header>
 
