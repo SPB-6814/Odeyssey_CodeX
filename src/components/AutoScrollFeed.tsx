@@ -5,7 +5,7 @@ import { useEffect, useRef, useState } from "react";
 export default function AutoScrollFeed({ items, feedType }: { items: any[], feedType: 'negative' | 'positive' }) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [isHovered, setIsHovered] = useState(false);
-  const requestRef = useRef<number>();
+  const requestRef = useRef<number | null>(null);
 
   useEffect(() => {
     const container = containerRef.current;
@@ -42,16 +42,21 @@ export default function AutoScrollFeed({ items, feedType }: { items: any[], feed
       ref={containerRef}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      className={`absolute inset-0 ${isHovered ? 'overflow-y-auto no-scrollbar' : 'overflow-hidden'}`}
+      className="absolute inset-0 overflow-y-auto no-scrollbar"
       style={{ WebkitOverflowScrolling: 'touch' }}
     >
-      {/* Render two sets for seamless looping */}
-      <div className="flex flex-col px-4 pt-4 gap-4">
-        {items.map((item, i) => <FeedItem key={`1-${i}`} item={item} type={feedType} />)}
-      </div>
-      <div className="flex flex-col px-4 pt-4 pb-4 gap-4">
-        {items.map((item, i) => <FeedItem key={`2-${i}`} item={item} type={feedType} />)}
-      </div>
+      {items.length === 0 ? (
+        <div className="flex h-full items-center justify-center text-slate-500 text-sm">No feed items available.</div>
+      ) : (
+        <>
+          <div className="min-h-full flex flex-col px-4 pt-4 gap-4">
+            {items.map((item, i) => <FeedItem key={`1-${i}`} item={item} type={feedType} />)}
+          </div>
+          <div className="min-h-full flex flex-col px-4 pt-4 pb-4 gap-4">
+            {items.map((item, i) => <FeedItem key={`2-${i}`} item={item} type={feedType} />)}
+          </div>
+        </>
+      )}
     </div>
   );
 }

@@ -1,11 +1,8 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-<<<<<<< Updated upstream
 import { Sidebar } from "@/components/ui/Sidebar";
-=======
 import Link from "next/link";
 import HeaderProfile from "@/components/HeaderProfile";
->>>>>>> Stashed changes
 import "./globals.css";
 
 const inter = Inter({
