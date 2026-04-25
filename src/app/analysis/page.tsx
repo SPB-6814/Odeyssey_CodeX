@@ -1,4 +1,5 @@
 "use client";
+import { use } from "react";
 import { BentoBox } from "@/components/ui/BentoBox";
 import { Line, Bar } from 'react-chartjs-2';
 import {
@@ -68,8 +69,8 @@ const commonIssues = [
   { issue: 'Duplicate content', count: 12, severity: 'medium' },
 ];
 
-export default async function AnalysisPage({ searchParams }: { searchParams: Promise<{ url?: string }> }) {
-  const params = await searchParams;
+export default function AnalysisPage({ searchParams }: { searchParams: Promise<{ url?: string }> }) {
+  const params = use(searchParams);
   const auditUrl = params?.url || "Unknown Product";
 
   return (

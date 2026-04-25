@@ -58,16 +58,46 @@ export default function RootLayout({
                 <p className="font-inter text-[9px] uppercase tracking-wider text-slate-500">Vigilant Mode Active</p>
               </div>
             </div>
-            <nav className="space-y-2">
-              <a className="flex items-center gap-4 px-4 py-3 bg-white/5 text-white rounded-lg font-inter text-[10px] font-bold uppercase tracking-[0.2em] transition-all group" href="#">
-                <span className="material-symbols-outlined text-sm text-primary group-hover:scale-110 transition-transform">Analytics</span>
-                Analytics
+            <div className="flex flex-col gap-6">
+              {/* New Analytics Button */}
+              <a href="/" className="flex items-center justify-center gap-2 px-4 py-3 bg-primary text-on-primary hover:brightness-110 rounded-xl font-inter text-[11px] font-bold uppercase tracking-[0.1em] transition-all shadow-lg shadow-primary/20">
+                <span className="material-symbols-outlined text-lg">add</span>
+                New Analytics
               </a>
-              <a className="flex items-center gap-4 px-4 py-3 text-slate-500 hover:text-slate-200 hover:bg-white/[0.02] rounded-lg font-inter text-[10px] font-bold uppercase tracking-[0.2em] transition-all group" href="#">
-                <span className="material-symbols-outlined text-sm group-hover:scale-110 transition-transform">Feed</span>
-                Feed
-              </a>
-            </nav>
+
+              {/* Main Navigation */}
+              <nav className="space-y-2">
+                <a className="flex items-center gap-4 px-4 py-3 bg-white/5 text-white rounded-lg font-inter text-[10px] font-bold uppercase tracking-[0.2em] transition-all group" href="#">
+                  <span className="material-symbols-outlined text-sm text-primary group-hover:scale-110 transition-transform">analytics</span>
+                  Analytics
+                </a>
+                <a className="flex items-center gap-4 px-4 py-3 text-slate-500 hover:text-slate-200 hover:bg-white/[0.02] rounded-lg font-inter text-[10px] font-bold uppercase tracking-[0.2em] transition-all group" href="#">
+                  <span className="material-symbols-outlined text-sm group-hover:scale-110 transition-transform">feed</span>
+                  Feed
+                </a>
+              </nav>
+
+              {/* Recent Analytics List */}
+              <div className="flex-1 overflow-y-auto pr-2 -mr-2 space-y-1 custom-scrollbar">
+                <h3 className="px-4 text-[9px] font-bold uppercase tracking-[0.2em] text-slate-500 mb-3 mt-2">Recent</h3>
+                <a className="flex items-center gap-3 px-4 py-2.5 text-slate-400 hover:text-white hover:bg-white/5 rounded-lg transition-all group" href="/analysis?url=cryptowallet.pro">
+                  <span className="material-symbols-outlined text-[14px] text-slate-500 group-hover:text-primary transition-colors">history</span>
+                  <span className="font-body-sm text-[12px] truncate">CryptoWallet Pro Audit</span>
+                </a>
+                <a className="flex items-center gap-3 px-4 py-2.5 text-slate-400 hover:text-white hover:bg-white/5 rounded-lg transition-all group" href="/analysis?url=authguard.app">
+                  <span className="material-symbols-outlined text-[14px] text-slate-500 group-hover:text-primary transition-colors">history</span>
+                  <span className="font-body-sm text-[12px] truncate">AuthGuard Analysis</span>
+                </a>
+                <a className="flex items-center gap-3 px-4 py-2.5 text-slate-400 hover:text-white hover:bg-white/5 rounded-lg transition-all group" href="/analysis?url=defiswap.io">
+                  <span className="material-symbols-outlined text-[14px] text-slate-500 group-hover:text-primary transition-colors">history</span>
+                  <span className="font-body-sm text-[12px] truncate">DefiSwap Deep Scan</span>
+                </a>
+                <a className="flex items-center gap-3 px-4 py-2.5 text-slate-400 hover:text-white hover:bg-white/5 rounded-lg transition-all group" href="/analysis?url=indiegame.studio">
+                  <span className="material-symbols-outlined text-[14px] text-slate-500 group-hover:text-primary transition-colors">history</span>
+                  <span className="font-body-sm text-[12px] truncate">IndieGame Studio Review</span>
+                </a>
+              </div>
+            </div>
           </div>
           <div className="mt-auto p-8 border-t border-white/5 bg-black/20">
             <button className="w-full bg-primary text-on-primary font-label-caps text-[11px] py-4 rounded-lg tracking-[0.2em] uppercase mb-8 hover:brightness-110 shadow-lg shadow-primary/20 transition-all">Export Report</button>
