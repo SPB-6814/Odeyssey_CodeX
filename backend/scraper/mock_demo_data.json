@@ -1,0 +1,375 @@
+{
+    "amazon": {
+        "product": {
+            "name": "Sony WH-1000XM5 Wireless Industry Leading Noise Canceling Headphones",
+            "category": "Electronics",
+            "original_rating": 4.4,
+            "total_reviews": 12847
+        },
+        "reviews": [
+            {
+                "reviewer_id": "a1b2c3d4e5",
+                "reviewer": "Rahul Sharma",
+                "rating": 5.0,
+                "text": "These headphones are absolutely worth every rupee. The noise cancellation is phenomenal — I can work in a busy cafe without any distractions. Battery life easily lasts a full workday. Highly recommend for WFH professionals.",
+                "date": "2024-03-12"
+            },
+            {
+                "reviewer_id": "f6g7h8i9j0",
+                "reviewer": "Priya Menon",
+                "rating": 4.0,
+                "text": "Great sound quality and the ANC works really well. The only downside is the ear cups get a bit warm after long sessions. The companion app is super useful for customizing EQ settings. Overall a solid purchase.",
+                "date": "2024-02-28"
+            },
+            {
+                "reviewer_id": "k1l2m3n4o5",
+                "reviewer": "Arjun Kapoor",
+                "rating": 5.0,
+                "text": "I was debating between this and Bose QC45 for weeks. Finally pulled the trigger on the XM5 and I am not disappointed. Call quality is excellent too — my teammates on Zoom say I sound crystal clear.",
+                "date": "2024-01-15"
+            },
+            {
+                "reviewer_id": "p6q7r8s9t0",
+                "reviewer": "Anjali Verma",
+                "rating": 4.0,
+                "text": "Build quality is slightly disappointing compared to the XM4. The plastic feels cheaper. But the audio and ANC performance is undeniably top-notch. Hoping Sony addresses the build for the next version.",
+                "date": "2024-03-05"
+            },
+            {
+                "reviewer_id": "u1v2w3x4y5",
+                "reviewer": "Siddharth Naik",
+                "rating": 5.0,
+                "text": "Bought this for my daily Mumbai local commute. The noise cancellation effectively blocks out all the rail noise. Battery lasts me 3 days on a single charge with modest use. Best commuting purchase I have made.",
+                "date": "2024-04-01"
+            },
+            {
+                "reviewer_id": "z6a7b8c9d0",
+                "reviewer": "Divya Nair",
+                "rating": 3.0,
+                "text": "The sound is excellent but I expected better. The touch controls are a bit finicky and sometimes register accidental inputs. The headband causes mild pressure on the top of my head during 4+ hour sessions. Could be better.",
+                "date": "2024-02-10"
+            },
+            {
+                "reviewer_id": "e1f2g3h4i5",
+                "reviewer": "Vivek Patel",
+                "rating": 5.0,
+                "text": "Upgraded from the XM3 and the improvement in ANC is massive. The multipoint connection feature is a game changer — switches seamlessly between my laptop and phone. Worth the premium pricing.",
+                "date": "2024-03-20"
+            },
+            {
+                "reviewer_id": "j6k7l8m9n0",
+                "reviewer": "Neha Joshi",
+                "rating": 4.0,
+                "text": "Very good headphones for the price. The 30-hour battery life is not an exaggeration — I get around 28-30 hours consistently. The quick charge feature (3 hours from 10 min charge) is incredibly useful.",
+                "date": "2024-01-30"
+            },
+            {
+                "reviewer_id": "o1p2q3r4s5",
+                "reviewer": "Rohan Desai",
+                "rating": 5.0,
+                "text": "I am an audiophile and these headphones genuinely surprised me. The LDAC codec support means I get high-res audio from Tidal. The auto-play/pause when you remove the headphones is a nice touch.",
+                "date": "2024-04-10"
+            },
+            {
+                "reviewer_id": "t6u7v8w9x0",
+                "reviewer": "Meera Krishnan",
+                "rating": 4.0,
+                "text": "These pair perfectly with my iPhone. The Speak-to-Chat feature is clever and works well. Sound stage is wide and detailed. The case feels premium but is bulkier than my XM4 case. Minor complaint overall.",
+                "date": "2024-03-25"
+            },
+            {
+                "reviewer_id": "y1z2a3b4c5",
+                "reviewer": "Akash Gupta",
+                "rating": 5.0,
+                "text": "Got this for my teenager who is very picky about audio. She absolutely loves it. The sound is balanced, not too bass-heavy. Parents approved — no sound bleed even at max volume. Great for students.",
+                "date": "2024-02-14"
+            },
+            {
+                "reviewer_id": "d6e7f8g9h0",
+                "reviewer": "Sunita Rao",
+                "rating": 4.0,
+                "text": "I work as a sound engineer and these are my travel companions now. Accurate audio reproduction, great soundstage. The ANC is not perfect in very high-frequency environments but works astoundingly for its price range.",
+                "date": "2024-04-05"
+            },
+            {
+                "reviewer_id": "i1j2k3l4m5",
+                "reviewer": "Karan Mehta",
+                "rating": 5.0,
+                "text": "Comparing to my old Audio Technica M50X — this blows it out of the water for wireless convenience. The Sony app lets you fine-tune everything. 10/10 would recommend for anyone working remotely.",
+                "date": "2024-03-15"
+            },
+            {
+                "reviewer_id": "n6o7p8q9r0",
+                "reviewer": "Lakshmi Subramaniam",
+                "rating": 3.0,
+                "text": "The ANC is great but I found the sound profile too bassy for my taste even after EQ adjustment. Also, the connection occasionally drops for a second when switching between devices. For this price, I expected perfection.",
+                "date": "2024-02-20"
+            },
+            {
+                "reviewer_id": "s1t2u3v4w5",
+                "reviewer": "Abhishek Tiwari",
+                "rating": 5.0,
+                "text": "Absolutely love these. Using them daily for 6 months now. Zero issues. The build has held up well. If you're on the fence, just buy them. One of the best purchases I have made this year without doubt.",
+                "date": "2024-01-08"
+            },
+            {
+                "reviewer_id": "fa1bc23de4",
+                "reviewer": "John M",
+                "rating": 5.0,
+                "text": "BEST HEADPHONES EVER!!! OMG THESE ARE INCREDIBLE. Changed my life!! Buy immediately!! You will love love love them!!! 10 stars if I could give!!! Amazing amazing amazing product must buy!!!",
+                "date": "2024-03-01"
+            },
+            {
+                "reviewer_id": "fb5cd67ef8",
+                "reviewer": "Super Reviewer",
+                "rating": 5.0,
+                "text": "Perfect product. Perfect quality. Perfect sound. Perfect ANC. Perfect battery. Perfect everything. No flaws. Absolutely perfect. Best product on Amazon. Must buy. Trust me. 5 stars. Perfect.",
+                "date": "2024-03-01"
+            },
+            {
+                "reviewer_id": "fc9de01fg2",
+                "reviewer": "Happy User 99",
+                "rating": 5.0,
+                "text": "WOW!!!! Just WOW!!! These headphones are unbelievable!!! I cannot believe how good they are!!! Everyone should buy these immediately!!! Life changing purchase!!! Do not hesitate just buy now!!!",
+                "date": "2024-03-02"
+            },
+            {
+                "reviewer_id": "fd3ef45gh6",
+                "reviewer": "Amazing Product Fan",
+                "rating": 5.0,
+                "text": "Incredible outstanding superb excellent fantastic wonderful magnificent phenomenal headphones. Simply the best. No competitor comes close. Buy now. Never regret. Best seller for a reason. 200% recommend.",
+                "date": "2024-03-02"
+            },
+            {
+                "reviewer_id": "fe7fg89hi0",
+                "reviewer": "Top Reviewer 2024",
+                "rating": 5.0,
+                "text": "I bought this yesterday and already it is the single best thing I have ever purchased in my entire life. The seller is amazing, the product is amazing, the shipping was amazing. Everything is AMAZING!!! Buy now!!!",
+                "date": "2024-03-03"
+            },
+            {
+                "reviewer_id": "ff1gh23ij4",
+                "reviewer": "Value Seeker",
+                "rating": 5.0,
+                "text": "Best headphones in the world. I have tried every brand and nothing compares. The price is worth it 10000 times over. Do not read other reviews just trust me and buy. You will thank me later. 5 stars forever.",
+                "date": "2024-03-03"
+            },
+            {
+                "reviewer_id": "fg5hi67kl8",
+                "reviewer": "Gadget King",
+                "rating": 5.0,
+                "text": "Simply perfect. No words can describe how incredible these are. The moment I put them on I knew my life would never be the same. TOP QUALITY. BEST PRODUCT. BUY IMMEDIATELY. DO NOT WAIT.",
+                "date": "2024-03-04"
+            },
+            {
+                "reviewer_id": "fh9ij01lm2",
+                "reviewer": "Satisfied Customer",
+                "rating": 5.0,
+                "text": "Just received my order and WOW. Incredible. Phenomenal. Outstanding. Beyond expectations. Best purchase of 2024. Everyone needs these. Tell your friends your family tell everyone. Simply the best product.",
+                "date": "2024-03-04"
+            }
+        ]
+    },
+    "myntra": {
+        "product": {
+            "name": "Levi's Men 511 Slim Fit Mid Rise Clean Look Stretchable Jeans",
+            "category": "Men's Clothing",
+            "original_rating": 4.2,
+            "total_reviews": 8634
+        },
+        "reviews": [
+            {
+                "reviewer_id": "m1a2b3c4d5",
+                "reviewer": "Aarav Singh",
+                "rating": 4.0,
+                "text": "Great fit for slim body types. The stretch fabric makes it really comfortable for all-day wear. Color is accurate to what is shown on the website. Washed twice and no fading so far. Would buy the same in other colors.",
+                "date": "2024-03-10"
+            },
+            {
+                "reviewer_id": "m6e7f8g9h0",
+                "reviewer": "Kabir Malhotra",
+                "rating": 5.0,
+                "text": "Perfect slim fit jeans. The denim quality is excellent — feels premium and not like cheap fast fashion. Fits true to size. The stretch is just right — enough to be comfortable but not so much that it looks weird.",
+                "date": "2024-02-22"
+            },
+            {
+                "reviewer_id": "m1i2j3k4l5",
+                "reviewer": "Yash Mehta",
+                "rating": 4.0,
+                "text": "Good quality for the price, especially when bought during sale. The mid-rise sits perfectly. My only complaint is that the waist is slightly narrower than standard — I had to size up by one. Check the size guide carefully.",
+                "date": "2024-01-18"
+            },
+            {
+                "reviewer_id": "m6m7n8o9p0",
+                "reviewer": "Ishaan Chaudhary",
+                "rating": 3.0,
+                "text": "Decent jeans but I expected more from Levi's. The hem came slightly frayed after 3 washes. The color also faded faster than I would expect from a premium brand. Would consider before buying again at full price.",
+                "date": "2024-03-08"
+            },
+            {
+                "reviewer_id": "m1q2r3s4t5",
+                "reviewer": "Veer Khanna",
+                "rating": 5.0,
+                "text": "Exactly what I was looking for. Clean look, no unnecessarily large stitching details. The stretch makes it wearable for both casual and slightly formal occasions. Superb value during the Myntra sale.",
+                "date": "2024-04-02"
+            },
+            {
+                "reviewer_id": "m6u7v8w9x0",
+                "reviewer": "Harsh Pandey",
+                "rating": 4.0,
+                "text": "Third pair of 511s I own. Consistent quality across purchases. The denim is thick and durable. Gets better with each wash like good denim should. The slim fit is perfect — not too tight, not loose.",
+                "date": "2024-02-15"
+            },
+            {
+                "reviewer_id": "m1y2z3a4b5",
+                "reviewer": "Dev Rathore",
+                "rating": 5.0,
+                "text": "Styling is on point. The cut makes legs look well-proportioned. I am 5'10 and 65 kg — size 30x32 fits perfectly without any alteration needed. Received genuine Levi's product with proper tags and packaging.",
+                "date": "2024-03-28"
+            },
+            {
+                "reviewer_id": "m6c7d8e9f0",
+                "reviewer": "Aditya Bose",
+                "rating": 4.0,
+                "text": "Good everyday jeans. Comfortable enough to wear to office in a smart casual environment. The color options are versatile. Myntra delivery was prompt and well-packaged. Price-to-quality ratio is good.",
+                "date": "2024-01-25"
+            },
+            {
+                "reviewer_id": "m1g2h3i4j5",
+                "reviewer": "Rishi Banerjee",
+                "rating": 5.0,
+                "text": "My go-to brand for jeans now. The 511 cut is universally flattering. The denim has just enough weight to look structured without being stiff. Wearing it to interviews and dates — works perfectly for both.",
+                "date": "2024-04-12"
+            },
+            {
+                "reviewer_id": "m6k7l8m9n0",
+                "reviewer": "Vikram Iyer",
+                "rating": 3.0,
+                "text": "Quality is good but not exceptional. The button size is slightly smaller than my previous pair making it harder to fasten quickly. Fabric is soft. Overall it is a functional pair of slim jeans but not groundbreaking.",
+                "date": "2024-02-28"
+            },
+            {
+                "reviewer_id": "m1o2p3q4r5",
+                "reviewer": "Nikhil Thakur",
+                "rating": 5.0,
+                "text": "Bought during End of Reason Sale. The discount made it exceptional value. Original price might be slightly high but on sale this is a steal. Levi's quality is reliable and consistent across all their products.",
+                "date": "2024-03-18"
+            },
+            {
+                "reviewer_id": "m6s7t8u9v0",
+                "reviewer": "Sumit Agarwal",
+                "rating": 4.0,
+                "text": "Clean minimalist design is exactly what I wanted. No branding overload. The small red Levi's tab is subtle and classy. Fits well, comfortable fabric. Recommend going for official seller on Myntra to avoid variants.",
+                "date": "2024-04-08"
+            },
+            {
+                "reviewer_id": "mf1ab23cd4",
+                "reviewer": "Fashion Fan",
+                "rating": 5.0,
+                "text": "BEST JEANS EVER!!! OMG AMAZING!!! Bought yesterday and already obsessed!!! Perfect perfect perfect!!! Everyone should buy immediately!!! Life changing jeans!!! 10 stars!!!!",
+                "date": "2024-03-05"
+            },
+            {
+                "reviewer_id": "mf5ef67gh8",
+                "reviewer": "Style King",
+                "rating": 5.0,
+                "text": "Perfect jeans. Perfect fit. Perfect color. Perfect quality. Perfect everything. No complaints. Must buy. Best on Myntra. Trust me. Buy now. Tell your friends. Simply outstanding.",
+                "date": "2024-03-06"
+            },
+            {
+                "reviewer_id": "mf9ij01kl2",
+                "reviewer": "Happy Shopper",
+                "rating": 5.0,
+                "text": "INCREDIBLE JEANS!!! Just received and WOW!!! Cannot believe how amazing they are!!! Best purchase this year!!! Do not wait just buy!!! You will love them forever!!!",
+                "date": "2024-03-06"
+            },
+            {
+                "reviewer_id": "mf3mn45op6",
+                "reviewer": "Top Fashion Reviewer",
+                "rating": 5.0,
+                "text": "Phenomenal outstanding magnificent superb jeans. Simply the best on the market. No other brand comes close. Changed the way I dress. 200% recommend to everyone. Buy now do not delay.",
+                "date": "2024-03-07"
+            },
+            {
+                "reviewer_id": "mf7qr89st0",
+                "reviewer": "Verified Buyer 2024",
+                "rating": 5.0,
+                "text": "Best clothing purchase I have made in my entire life. The seller is fantastic the product is fantastic the delivery was fantastic. Everything about this purchase is FANTASTIC. Buy now immediately.",
+                "date": "2024-03-07"
+            },
+            {
+                "reviewer_id": "mf1uv23wx4",
+                "reviewer": "Jeans Expert",
+                "rating": 5.0,
+                "text": "Tested against 10 other brands. This wins on every metric. Quality comfort style durability. Perfect in every way. Do not bother with competitors just buy this. No regrets whatsoever. 5 stars always.",
+                "date": "2024-03-08"
+            }
+        ]
+    },
+    "flipkart": {
+        "product": {
+            "name": "boAt Rockerz 550 Bluetooth Headphone with 20H Battery, 50mm Drivers",
+            "category": "Electronics",
+            "original_rating": 4.1,
+            "total_reviews": 45823
+        },
+        "reviews": [
+            {
+                "reviewer_id": "fl1a2b3c4d",
+                "reviewer": "Sachin Gupta",
+                "rating": 4.0,
+                "text": "Very good headphones for this price range. The bass is punchy and the sound overall is enjoyable for casual music listening. Battery genuinely lasts 18-20 hours on Bluetooth. Build quality is decent for a budget pair.",
+                "date": "2024-03-14"
+            },
+            {
+                "reviewer_id": "fl5e6f7g8h",
+                "reviewer": "Pooja Sharma",
+                "rating": 5.0,
+                "text": "Excellent product at this price point. The cushions are soft and comfortable for long listening sessions. AUX mode sounds even better than Bluetooth. The folding design makes it portable. No issues after 3 months of daily use.",
+                "date": "2024-02-18"
+            },
+            {
+                "reviewer_id": "fl9i0j1k2l",
+                "reviewer": "Deepak Kumar",
+                "rating": 3.0,
+                "text": "Average quality. The sound is fine for everyday use but the mids are recessed making vocals sound distant. The headband creaks slightly when adjusting. For this price it is acceptable but do not expect premium quality.",
+                "date": "2024-01-22"
+            },
+            {
+                "reviewer_id": "fl3m4n5o6p",
+                "reviewer": "Ritu Agarwal",
+                "rating": 4.0,
+                "text": "Good headphones for students and casual users. The battery life is the standout feature. I use these daily for about 4-5 hours and charge once every 4 days. Sound quality is decent for the price.",
+                "date": "2024-03-30"
+            },
+            {
+                "reviewer_id": "fl7q8r9s0t",
+                "reviewer": "Manish Yadav",
+                "rating": 5.0,
+                "text": "Absolute value for money. These compare well against headphones costing 2-3x more in terms of battery and comfort. Sound could be more refined but for Rs. 1500 you cannot complain. Highly recommended for budget buyers.",
+                "date": "2024-04-05"
+            },
+            {
+                "reviewer_id": "ff1fl23mn4",
+                "reviewer": "Deal Seeker",
+                "rating": 5.0,
+                "text": "BEST HEADPHONES IN THIS PRICE!!! AMAZING QUALITY!!! EVERYONE BUY IMMEDIATELY!!! LIFE CHANGING PRODUCT!!! 10 STARS!!!! INCREDIBLE OUTSTANDING SUPERB!!!",
+                "date": "2024-02-05"
+            },
+            {
+                "reviewer_id": "ff5fl67op8",
+                "reviewer": "Happy Customer 123",
+                "rating": 5.0,
+                "text": "Perfect headphones. Perfect sound. Perfect battery. Perfect comfort. Perfect build. Perfect delivery. Perfect everything. Must buy. No questions. Just buy. Best on Flipkart. 5 stars forever.",
+                "date": "2024-02-06"
+            },
+            {
+                "reviewer_id": "ff9fl01qr2",
+                "reviewer": "Budget Audio Fan",
+                "rating": 5.0,
+                "text": "WOW just WOW. Cannot believe how incredible these are for this price. Exceeded every single expectation I had. Buy immediately. Tell all your friends and family. Best purchase of 2024 easily.",
+                "date": "2024-02-07"
+            }
+        ]
+    }
+}

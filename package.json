@@ -3,7 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "sh -c '.venv/bin/python -m uvicorn main:app --host 127.0.0.1 --port 8000 --app-dir backend & next dev'",
+    "dev:web": "next dev",
+    "dev:backend": ".venv/bin/python -m uvicorn main:app --host 127.0.0.1 --port 8000 --app-dir backend",
+    "dev:all": "sh -c '.venv/bin/python -m uvicorn main:app --host 127.0.0.1 --port 8000 --app-dir backend & next dev'",
     "build": "next build",
     "start": "next start",
     "lint": "eslint"
