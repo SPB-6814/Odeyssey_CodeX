@@ -332,48 +332,50 @@ export default async function AnalysisPage({ searchParams }: { searchParams: Pro
           <div className="flex-1 min-h-[380px] relative overflow-hidden rounded-xl border border-white/5 bg-black/40">
             <div className="absolute top-0 left-0 right-0 h-16 bg-gradient-to-b from-[#050507] to-transparent z-10 pointer-events-none"></div>
             <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-[#050507] to-transparent z-10 pointer-events-none"></div>
-            <div className="absolute w-full animate-scroll-vertical">
-              <div className="flex flex-col px-4 pt-4 gap-4">
-                {[
-                  { title: "CryptoWallet Pro", status: "Flagged Safe", issue: "Malware Payload Detected", time: "2m ago" },
-                  { title: "SecureVPN Ext", status: "Clean Scan", issue: "Data Exfiltration", time: "15m ago" },
-                  { title: "DefiSwap Portal", status: "No Threat", issue: "Phishing Redirect", time: "1h ago" },
-                  { title: "AuthGuard App", status: "Trusted", issue: "Credential Harvesting", time: "3h ago" }
-                ].map((item, i) => (
-                  <div key={i} className="bg-white/5 border border-white/10 rounded-lg p-4 hover:bg-white/10 transition-colors shrink-0">
-                    <div className="flex justify-between items-start mb-2">
-                      <span className="font-bold text-white font-body-sm">{item.title}</span>
-                      <span className="font-data-mono text-[10px] text-slate-500">{item.time}</span>
+            <div className="h-full overflow-y-auto pr-2 scrollbar-thin scrollbar-thumb-slate-600/40 scrollbar-track-transparent">
+              <div className="animate-scroll-vertical">
+                <div className="flex flex-col px-4 pt-4 gap-4">
+                  {[
+                    { title: "CryptoWallet Pro", status: "Flagged Safe", issue: "Malware Payload Detected", time: "2m ago" },
+                    { title: "SecureVPN Ext", status: "Clean Scan", issue: "Data Exfiltration", time: "15m ago" },
+                    { title: "DefiSwap Portal", status: "No Threat", issue: "Phishing Redirect", time: "1h ago" },
+                    { title: "AuthGuard App", status: "Trusted", issue: "Credential Harvesting", time: "3h ago" }
+                  ].map((item, i) => (
+                    <div key={i} className="bg-white/5 border border-white/10 rounded-lg p-4 hover:bg-white/10 transition-colors shrink-0">
+                      <div className="flex justify-between items-start mb-2">
+                        <span className="font-bold text-white font-body-sm">{item.title}</span>
+                        <span className="font-data-mono text-[10px] text-slate-500">{item.time}</span>
+                      </div>
+                      <div className="flex items-center gap-2 mb-2">
+                        <span className="px-2 py-0.5 bg-green-500/10 text-green-400 text-[10px] rounded border border-green-500/20">{item.status}</span>
+                        <span className="material-symbols-outlined text-[14px] text-slate-500">arrow_right_alt</span>
+                        <span className="px-2 py-0.5 bg-error/10 text-error text-[10px] rounded border border-error/20 font-bold">{item.issue}</span>
+                      </div>
+                      <p className="font-body-sm text-xs text-slate-400">Post-analysis revealed advanced evasion techniques bypassing initial heuristics.</p>
                     </div>
-                    <div className="flex items-center gap-2 mb-2">
-                      <span className="px-2 py-0.5 bg-green-500/10 text-green-400 text-[10px] rounded border border-green-500/20">{item.status}</span>
-                      <span className="material-symbols-outlined text-[14px] text-slate-500">arrow_right_alt</span>
-                      <span className="px-2 py-0.5 bg-error/10 text-error text-[10px] rounded border border-error/20 font-bold">{item.issue}</span>
+                  ))}
+                </div>
+                <div className="flex flex-col px-4 pt-4 gap-4">
+                  {[
+                    { title: "CryptoWallet Pro", status: "Flagged Safe", issue: "Malware Payload Detected", time: "2m ago" },
+                    { title: "SecureVPN Ext", status: "Clean Scan", issue: "Data Exfiltration", time: "15m ago" },
+                    { title: "DefiSwap Portal", status: "No Threat", issue: "Phishing Redirect", time: "1h ago" },
+                    { title: "AuthGuard App", status: "Trusted", issue: "Credential Harvesting", time: "3h ago" }
+                  ].map((item, i) => (
+                    <div key={`dup-${i}`} className="bg-white/5 border border-white/10 rounded-lg p-4 hover:bg-white/10 transition-colors shrink-0">
+                      <div className="flex justify-between items-start mb-2">
+                        <span className="font-bold text-white font-body-sm">{item.title}</span>
+                        <span className="font-data-mono text-[10px] text-slate-500">{item.time}</span>
+                      </div>
+                      <div className="flex items-center gap-2 mb-2">
+                        <span className="px-2 py-0.5 bg-green-500/10 text-green-400 text-[10px] rounded border border-green-500/20">{item.status}</span>
+                        <span className="material-symbols-outlined text-[14px] text-slate-500">arrow_right_alt</span>
+                        <span className="px-2 py-0.5 bg-error/10 text-error text-[10px] rounded border border-error/20 font-bold">{item.issue}</span>
+                      </div>
+                      <p className="font-body-sm text-xs text-slate-400">Post-analysis revealed advanced evasion techniques bypassing initial heuristics.</p>
                     </div>
-                    <p className="font-body-sm text-xs text-slate-400">Post-analysis revealed advanced evasion techniques bypassing initial heuristics.</p>
-                  </div>
-                ))}
-              </div>
-              <div className="flex flex-col px-4 pt-4 gap-4">
-                {[
-                  { title: "CryptoWallet Pro", status: "Flagged Safe", issue: "Malware Payload Detected", time: "2m ago" },
-                  { title: "SecureVPN Ext", status: "Clean Scan", issue: "Data Exfiltration", time: "15m ago" },
-                  { title: "DefiSwap Portal", status: "No Threat", issue: "Phishing Redirect", time: "1h ago" },
-                  { title: "AuthGuard App", status: "Trusted", issue: "Credential Harvesting", time: "3h ago" }
-                ].map((item, i) => (
-                  <div key={`dup-${i}`} className="bg-white/5 border border-white/10 rounded-lg p-4 hover:bg-white/10 transition-colors shrink-0">
-                    <div className="flex justify-between items-start mb-2">
-                      <span className="font-bold text-white font-body-sm">{item.title}</span>
-                      <span className="font-data-mono text-[10px] text-slate-500">{item.time}</span>
-                    </div>
-                    <div className="flex items-center gap-2 mb-2">
-                      <span className="px-2 py-0.5 bg-green-500/10 text-green-400 text-[10px] rounded border border-green-500/20">{item.status}</span>
-                      <span className="material-symbols-outlined text-[14px] text-slate-500">arrow_right_alt</span>
-                      <span className="px-2 py-0.5 bg-error/10 text-error text-[10px] rounded border border-error/20 font-bold">{item.issue}</span>
-                    </div>
-                    <p className="font-body-sm text-xs text-slate-400">Post-analysis revealed advanced evasion techniques bypassing initial heuristics.</p>
-                  </div>
-                ))}
+                  ))}
+                </div>
               </div>
             </div>
           </div>
@@ -394,48 +396,50 @@ export default async function AnalysisPage({ searchParams }: { searchParams: Pro
           <div className="flex-1 min-h-[380px] relative overflow-hidden rounded-xl border border-white/5 bg-black/40">
             <div className="absolute top-0 left-0 right-0 h-16 bg-gradient-to-b from-[#050507] to-transparent z-10 pointer-events-none"></div>
             <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-[#050507] to-transparent z-10 pointer-events-none"></div>
-            <div className="absolute w-full animate-scroll-vertical">
-              <div className="flex flex-col px-4 pt-4 gap-4">
-                {[
-                  { title: "IndieGame Studio", status: "Blocked", resolution: "Verified Authentic", time: "10m ago" },
-                  { title: "CharityFund DAO", status: "High Risk", resolution: "Legitimate Entity", time: "45m ago" },
-                  { title: "LocalNews Blog", status: "Bot Activity", resolution: "Organic Viral Traffic", time: "2h ago" },
-                  { title: "ArtisanMarket", status: "Scam Warning", resolution: "Secure Transactions", time: "5h ago" }
-                ].map((item, i) => (
-                  <div key={i} className="bg-white/5 border border-white/10 rounded-lg p-4 hover:bg-white/10 transition-colors shrink-0">
-                    <div className="flex justify-between items-start mb-2">
-                      <span className="font-bold text-white font-body-sm">{item.title}</span>
-                      <span className="font-data-mono text-[10px] text-slate-500">{item.time}</span>
+            <div className="h-full overflow-y-auto pr-2 scrollbar-thin scrollbar-thumb-slate-600/40 scrollbar-track-transparent">
+              <div className="animate-scroll-vertical">
+                <div className="flex flex-col px-4 pt-4 gap-4">
+                  {[
+                    { title: "IndieGame Studio", status: "Blocked", resolution: "Verified Authentic", time: "10m ago" },
+                    { title: "CharityFund DAO", status: "High Risk", resolution: "Legitimate Entity", time: "45m ago" },
+                    { title: "LocalNews Blog", status: "Bot Activity", resolution: "Organic Viral Traffic", time: "2h ago" },
+                    { title: "ArtisanMarket", status: "Scam Warning", resolution: "Secure Transactions", time: "5h ago" }
+                  ].map((item, i) => (
+                    <div key={i} className="bg-white/5 border border-white/10 rounded-lg p-4 hover:bg-white/10 transition-colors shrink-0">
+                      <div className="flex justify-between items-start mb-2">
+                        <span className="font-bold text-white font-body-sm">{item.title}</span>
+                        <span className="font-data-mono text-[10px] text-slate-500">{item.time}</span>
+                      </div>
+                      <div className="flex items-center gap-2 mb-2">
+                        <span className="px-2 py-0.5 bg-error/10 text-error text-[10px] rounded border border-error/20">{item.status}</span>
+                        <span className="material-symbols-outlined text-[14px] text-slate-500">arrow_right_alt</span>
+                        <span className="px-2 py-0.5 bg-green-500/10 text-green-400 text-[10px] rounded border border-green-500/20 font-bold">{item.resolution}</span>
+                      </div>
+                      <p className="font-body-sm text-xs text-slate-400">Manual review and extended behavioral context confirmed legitimate operations.</p>
                     </div>
-                    <div className="flex items-center gap-2 mb-2">
-                      <span className="px-2 py-0.5 bg-error/10 text-error text-[10px] rounded border border-error/20">{item.status}</span>
-                      <span className="material-symbols-outlined text-[14px] text-slate-500">arrow_right_alt</span>
-                      <span className="px-2 py-0.5 bg-green-500/10 text-green-400 text-[10px] rounded border border-green-500/20 font-bold">{item.resolution}</span>
+                  ))}
+                </div>
+                <div className="flex flex-col px-4 pt-4 gap-4">
+                  {[
+                    { title: "IndieGame Studio", status: "Blocked", resolution: "Verified Authentic", time: "10m ago" },
+                    { title: "CharityFund DAO", status: "High Risk", resolution: "Legitimate Entity", time: "45m ago" },
+                    { title: "LocalNews Blog", status: "Bot Activity", resolution: "Organic Viral Traffic", time: "2h ago" },
+                    { title: "ArtisanMarket", status: "Scam Warning", resolution: "Secure Transactions", time: "5h ago" }
+                  ].map((item, i) => (
+                    <div key={`dup-${i}`} className="bg-white/5 border border-white/10 rounded-lg p-4 hover:bg-white/10 transition-colors shrink-0">
+                      <div className="flex justify-between items-start mb-2">
+                        <span className="font-bold text-white font-body-sm">{item.title}</span>
+                        <span className="font-data-mono text-[10px] text-slate-500">{item.time}</span>
+                      </div>
+                      <div className="flex items-center gap-2 mb-2">
+                        <span className="px-2 py-0.5 bg-error/10 text-error text-[10px] rounded border border-error/20">{item.status}</span>
+                        <span className="material-symbols-outlined text-[14px] text-slate-500">arrow_right_alt</span>
+                        <span className="px-2 py-0.5 bg-green-500/10 text-green-400 text-[10px] rounded border border-green-500/20 font-bold">{item.resolution}</span>
+                      </div>
+                      <p className="font-body-sm text-xs text-slate-400">Manual review and extended behavioral context confirmed legitimate operations.</p>
                     </div>
-                    <p className="font-body-sm text-xs text-slate-400">Manual review and extended behavioral context confirmed legitimate operations.</p>
-                  </div>
-                ))}
-              </div>
-              <div className="flex flex-col px-4 pt-4 gap-4">
-                {[
-                  { title: "IndieGame Studio", status: "Blocked", resolution: "Verified Authentic", time: "10m ago" },
-                  { title: "CharityFund DAO", status: "High Risk", resolution: "Legitimate Entity", time: "45m ago" },
-                  { title: "LocalNews Blog", status: "Bot Activity", resolution: "Organic Viral Traffic", time: "2h ago" },
-                  { title: "ArtisanMarket", status: "Scam Warning", resolution: "Secure Transactions", time: "5h ago" }
-                ].map((item, i) => (
-                  <div key={`dup-${i}`} className="bg-white/5 border border-white/10 rounded-lg p-4 hover:bg-white/10 transition-colors shrink-0">
-                    <div className="flex justify-between items-start mb-2">
-                      <span className="font-bold text-white font-body-sm">{item.title}</span>
-                      <span className="font-data-mono text-[10px] text-slate-500">{item.time}</span>
-                    </div>
-                    <div className="flex items-center gap-2 mb-2">
-                      <span className="px-2 py-0.5 bg-error/10 text-error text-[10px] rounded border border-error/20">{item.status}</span>
-                      <span className="material-symbols-outlined text-[14px] text-slate-500">arrow_right_alt</span>
-                      <span className="px-2 py-0.5 bg-green-500/10 text-green-400 text-[10px] rounded border border-green-500/20 font-bold">{item.resolution}</span>
-                    </div>
-                    <p className="font-body-sm text-xs text-slate-400">Manual review and extended behavioral context confirmed legitimate operations.</p>
-                  </div>
-                ))}
+                  ))}
+                </div>
               </div>
             </div>
           </div>
