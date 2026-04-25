@@ -1,12 +1,21 @@
+"use client";
+
+import { useEffect, useState } from "react";
 import { falseNegativePool, falsePositivePool, cleanReviewPool, getRandomItems } from "@/lib/mockData";
 import AutoScrollFeed from "@/components/AutoScrollFeed";
 
 export const dynamic = "force-dynamic";
 
 export default function Home() {
-  const falseNegatives = getRandomItems(falseNegativePool, 4);
-  const falsePositives = getRandomItems(falsePositivePool, 4);
-  const cleanReviews = getRandomItems(cleanReviewPool, 3);
+  const [falseNegatives, setFalseNegatives] = useState(falseNegativePool.slice(0, 4));
+  const [falsePositives, setFalsePositives] = useState(falsePositivePool.slice(0, 4));
+  const [cleanReviews, setCleanReviews] = useState(cleanReviewPool.slice(0, 3));
+
+  useEffect(() => {
+    setFalseNegatives(getRandomItems(falseNegativePool, 4));
+    setFalsePositives(getRandomItems(falsePositivePool, 4));
+    setCleanReviews(getRandomItems(cleanReviewPool, 3));
+  }, []);
 
   return (
     <>
@@ -52,73 +61,66 @@ export default function Home() {
         {/* Bento Grid Insights */}
         <div className="bento-grid">
           {/* False Negative Showcase */}
-          <div className="glass-panel col-span-12 md:col-span-6 rounded-2xl p-8 flex flex-col overflow-hidden relative">
-            <div className="flex justify-between items-center mb-8 relative z-10">
+          <div className="bg-[#0a0a0e] border border-white/5 col-span-12 md:col-span-6 rounded-2xl p-6 flex flex-col overflow-hidden relative">
+            <div className="flex justify-between items-center mb-6 relative z-10">
               <div className="flex items-center gap-4">
-                <div className="w-10 h-10 rounded-full bg-error/10 flex items-center justify-center">
-                  <span className="material-symbols-outlined text-error text-xl">policy</span>
+                <div className="w-10 h-10 rounded-[10px] bg-error/10 flex items-center justify-center border border-error/20">
+                  <span className="material-symbols-outlined text-error/90 text-[22px]">policy</span>
                 </div>
-                <h2 className="font-h2 text-xl font-bold text-white uppercase tracking-wider">False Negative</h2>
+                <h2 className="font-h2 text-[16px] font-bold text-white uppercase tracking-wider">False Negative</h2>
               </div>
               <div className="flex gap-3">
-                <span className="px-4 py-1.5 bg-error/10 text-error border border-error/20 font-bold text-[9px] tracking-[0.15em] rounded-full uppercase">MISSED THREATS</span>
+                <span className="px-3 py-1 bg-error/10 text-error/90 border border-error/20 font-bold text-[10px] tracking-[0.15em] rounded-full uppercase">Missed Threats</span>
               </div>
             </div>
             
-<<<<<<< Updated upstream
-            <div className="flex-1 min-h-[380px] relative overflow-hidden rounded-xl border border-white/5 bg-black/40">
-              <div className="absolute top-0 left-0 right-0 h-16 bg-gradient-to-b from-[#050507] to-transparent z-10 pointer-events-none"></div>
-              <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-[#050507] to-transparent z-10 pointer-events-none"></div>
-=======
-            <div className="flex-1 h-[380px] relative rounded-xl border border-white/5 bg-black/40 overflow-hidden">
-              <div className="absolute top-0 left-0 right-0 h-12 bg-gradient-to-b from-[#050507] to-transparent z-10 pointer-events-none"></div>
-              <div className="absolute bottom-0 left-0 right-0 h-12 bg-gradient-to-t from-[#050507] to-transparent z-10 pointer-events-none"></div>
+            <div className="h-[380px] w-full relative rounded-xl border border-white/5 bg-black/40 overflow-hidden">
+              <div className="absolute top-0 left-0 right-0 h-12 bg-gradient-to-b from-[#050507]/80 to-transparent z-10 pointer-events-none"></div>
+              <div className="absolute bottom-0 left-0 right-0 h-12 bg-gradient-to-t from-[#050507]/80 to-transparent z-10 pointer-events-none"></div>
               
->>>>>>> Stashed changes
               <AutoScrollFeed items={falseNegatives} feedType="negative" />
             </div>
           </div>
 
           {/* False Positive Showcase */}
-          <div className="glass-panel col-span-12 md:col-span-6 rounded-2xl p-8 flex flex-col overflow-hidden relative">
-            <div className="flex justify-between items-center mb-8 relative z-10">
+          <div className="bg-[#0a0a0e] border border-white/5 col-span-12 md:col-span-6 rounded-2xl p-6 flex flex-col overflow-hidden relative">
+            <div className="flex justify-between items-center mb-6 relative z-10">
               <div className="flex items-center gap-4">
-                <div className="w-10 h-10 rounded-full bg-green-500/10 flex items-center justify-center">
-                  <span className="material-symbols-outlined text-green-500 text-xl">verified_user</span>
+                <div className="w-10 h-10 rounded-[10px] bg-green-500/10 flex items-center justify-center border border-green-500/20">
+                  <span className="material-symbols-outlined text-green-500 text-[22px]">verified_user</span>
                 </div>
-                <h2 className="font-h2 text-xl font-bold text-white uppercase tracking-wider">False Positive</h2>
+                <h2 className="font-h2 text-[16px] font-bold text-white uppercase tracking-wider">False Positive</h2>
               </div>
               <div className="flex gap-3">
-                <span className="px-4 py-1.5 bg-green-500/10 text-green-400 border border-green-500/20 font-bold text-[9px] tracking-[0.15em] rounded-full uppercase">WRONGFULLY FLAGGED</span>
+                <span className="px-3 py-1 bg-green-500/10 text-green-500/90 border border-green-500/20 font-bold text-[10px] tracking-[0.15em] rounded-full uppercase">Wrongfully Flagged</span>
               </div>
             </div>
             
-<<<<<<< Updated upstream
-            <div className="flex-1 min-h-[380px] relative overflow-hidden rounded-xl border border-white/5 bg-black/40">
-              <div className="absolute top-0 left-0 right-0 h-16 bg-gradient-to-b from-[#050507] to-transparent z-10 pointer-events-none"></div>
-              <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-[#050507] to-transparent z-10 pointer-events-none"></div>
-=======
-            <div className="flex-1 h-[380px] relative rounded-xl border border-white/5 bg-black/40 overflow-hidden">
-              <div className="absolute top-0 left-0 right-0 h-12 bg-gradient-to-b from-[#050507] to-transparent z-10 pointer-events-none"></div>
-              <div className="absolute bottom-0 left-0 right-0 h-12 bg-gradient-to-t from-[#050507] to-transparent z-10 pointer-events-none"></div>
+            <div className="h-[380px] w-full relative rounded-xl border border-white/5 bg-black/40 overflow-hidden">
+              <div className="absolute top-0 left-0 right-0 h-12 bg-gradient-to-b from-[#050507]/80 to-transparent z-10 pointer-events-none"></div>
+              <div className="absolute bottom-0 left-0 right-0 h-12 bg-gradient-to-t from-[#050507]/80 to-transparent z-10 pointer-events-none"></div>
               
->>>>>>> Stashed changes
               <AutoScrollFeed items={falsePositives} feedType="positive" />
             </div>
           </div>
 
-          {/* Clean Reviews Grid */}
-          <div className="col-span-12 mt-8">
-            <div className="flex items-center gap-4 mb-6">
-              <div className="w-10 h-10 rounded-full bg-green-500/10 flex items-center justify-center">
-                <span className="material-symbols-outlined text-green-500 text-xl">star</span>
+          {/* Clean Reviews Section */}
+          <div className="bg-[#0a0a0e] border border-white/5 col-span-12 rounded-2xl p-6 flex flex-col overflow-hidden relative mt-8">
+            <div className="flex justify-between items-center mb-6 relative z-10">
+              <div className="flex items-center gap-4">
+                <div className="w-10 h-10 rounded-[10px] bg-green-500/10 flex items-center justify-center border border-green-500/20">
+                  <span className="material-symbols-outlined text-green-500 text-[22px]">star</span>
+                </div>
+                <h2 className="font-h2 text-[16px] font-bold text-white uppercase tracking-wider">Product With Good Clean Review</h2>
               </div>
-              <h2 className="font-h2 text-xl font-bold text-white uppercase tracking-wider">Product With Good Clean Review</h2>
+              <div className="flex gap-3">
+                <span className="px-3 py-1 bg-green-500/10 text-green-500/90 border border-green-500/20 font-bold text-[10px] tracking-[0.15em] rounded-full uppercase">Verified Safe</span>
+              </div>
             </div>
             
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {cleanReviews.map((review, i) => (
-                <div key={i} className="bg-white/5 border border-white/5 rounded-2xl p-8 hover:bg-white/[0.08] transition-all cursor-pointer group flex flex-col">
+                <div key={i} className="bg-white/[0.02] border border-white/5 rounded-2xl p-8 hover:bg-white/[0.04] transition-all cursor-pointer group flex flex-col h-full">
                   <div className="flex items-start justify-between mb-6">
                     <div className={`w-12 h-12 rounded-xl ${review.iconBgClass} flex items-center justify-center group-hover:scale-110 transition-transform`}>
                       <span className={`material-symbols-outlined ${review.iconTextClass} text-2xl`}>{review.icon}</span>

@@ -1,10 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { Sidebar } from "@/components/ui/Sidebar";
-<<<<<<< Updated upstream
-import Link from "next/link";
-=======
->>>>>>> Stashed changes
 import HeaderProfile from "@/components/HeaderProfile";
 import "./globals.css";
 
@@ -30,7 +26,7 @@ export default function RootLayout({
       </head>
       <body className="bg-background text-on-background min-h-screen flex flex-col selection:bg-primary selection:text-on-primary">
         <div className="fixed inset-0 grid-overlay pointer-events-none opacity-20 z-[-1]"></div>
-        
+
         {/* TopAppBar */}
         <header className="fixed top-0 w-full z-50 flex justify-between items-center px-8 h-16 bg-slate-950/60 backdrop-blur-xl border-b border-white/5">
           <div className="text-xl font-bold tracking-tighter text-white uppercase font-inter flex items-center gap-2">
