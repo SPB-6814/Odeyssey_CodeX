@@ -42,139 +42,233 @@ export default function Home() {
 
         {/* Bento Grid Insights */}
         <div className="bento-grid">
-          {/* Live Pulse - Global Ticker */}
-          <div className="glass-panel col-span-12 md:col-span-8 rounded-2xl p-8 flex flex-col overflow-hidden relative">
+          {/* False Negative Showcase */}
+          <div className="glass-panel col-span-12 md:col-span-6 rounded-2xl p-8 flex flex-col overflow-hidden relative">
             <div className="flex justify-between items-center mb-8 relative z-10">
               <div className="flex items-center gap-4">
-                <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
-                  <span className="material-symbols-outlined text-primary text-xl">sensors</span>
+                <div className="w-10 h-10 rounded-full bg-error/10 flex items-center justify-center">
+                  <span className="material-symbols-outlined text-error text-xl">policy</span>
                 </div>
-                <h2 className="font-h2 text-xl font-bold text-white uppercase tracking-wider">Live Pulse</h2>
+                <h2 className="font-h2 text-xl font-bold text-white uppercase tracking-wider">False Negative</h2>
               </div>
               <div className="flex gap-3">
-                <span className="px-4 py-1.5 bg-error/10 text-error border border-error/20 font-bold text-[9px] tracking-[0.15em] rounded-full uppercase">3,241 THREATS DETECTED TODAY</span>
+                <span className="px-4 py-1.5 bg-error/10 text-error border border-error/20 font-bold text-[9px] tracking-[0.15em] rounded-full uppercase">MISSED THREATS</span>
               </div>
             </div>
-            <div className="flex-1 min-h-[380px] rounded-xl overflow-hidden relative group">
-              {/* Map Background with custom glow points */}
-              <div className="absolute inset-0 bg-slate-950/40 z-0"></div>
-              <img alt="World Map" className="absolute inset-0 w-full h-full object-cover opacity-20 contrast-125 grayscale hover:grayscale-0 transition-all duration-1000 z-0" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC2t1Ccb-Oa3LB0AmH7JJKn3fJS9V5ZX8ON1y3HI22k5U_xG_XWL0EjOaD6-Gph2vgbaYWgM_ddsMPfqUfaQATRV5kA0GwRMWu-WJQjFgK08evOXA2lzgCxTKPX_UjxkQuu8CT0lW4qWY7cxMAwEr5BxFETkKUz0q6sINia9slEt0mgt2oP53aHXuXKVQwPVZbALUL9glh2ozLvrMjfaFGiaoxUA3Ted2psfBxX1L95npJTaM21HdjmuGobdYauj5nwaSYiNo-zx5S3"/>
+            
+            <div className="flex-1 min-h-[380px] relative overflow-hidden rounded-xl border border-white/5 bg-black/40">
+              <div className="absolute top-0 left-0 right-0 h-16 bg-gradient-to-b from-[#050507] to-transparent z-10 pointer-events-none"></div>
+              <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-[#050507] to-transparent z-10 pointer-events-none"></div>
               
-              {/* Decorative scanner lines */}
-              <div className="absolute inset-0 pointer-events-none overflow-hidden z-10">
-                <div className="absolute w-full h-[1px] bg-primary/20 top-1/4 animate-[scan_8s_ease-in-out_infinite]"></div>
-                <div className="absolute w-full h-[1px] bg-primary/20 top-3/4 animate-[scan_12s_ease-in-out_infinite]"></div>
-              </div>
-              
-              {/* Floating Data Points Overlay */}
-              <div className="absolute bottom-6 left-6 right-6 bg-black/60 backdrop-blur-xl border border-white/10 rounded-xl p-6 shadow-2xl z-20">
-                <div className="flex items-center justify-between mb-4 border-b border-white/5 pb-3">
-                  <span className="font-label-caps text-[9px] font-bold uppercase tracking-[0.2em] text-slate-400">REAL-TIME FEED</span>
-                  <span className="font-data-mono text-[10px] text-primary/60">LATENCY: 42ms</span>
+              <div className="absolute w-full animate-scroll-vertical">
+                {/* First Set */}
+                <div className="flex flex-col px-4 pt-4 gap-4">
+                  {[
+                    { title: "CryptoWallet Pro", status: "Flagged Safe", issue: "Malware Payload Detected", time: "2m ago" },
+                    { title: "SecureVPN Ext", status: "Clean Scan", issue: "Data Exfiltration", time: "15m ago" },
+                    { title: "DefiSwap Portal", status: "No Threat", issue: "Phishing Redirect", time: "1h ago" },
+                    { title: "AuthGuard App", status: "Trusted", issue: "Credential Harvesting", time: "3h ago" }
+                  ].map((item, i) => (
+                    <div key={i} className="bg-white/5 border border-white/10 rounded-lg p-4 hover:bg-white/10 transition-colors shrink-0">
+                      <div className="flex justify-between items-start mb-2">
+                        <span className="font-bold text-white font-body-sm">{item.title}</span>
+                        <span className="font-data-mono text-[10px] text-slate-500">{item.time}</span>
+                      </div>
+                      <div className="flex items-center gap-2 mb-2">
+                        <span className="px-2 py-0.5 bg-green-500/10 text-green-400 text-[10px] rounded border border-green-500/20">{item.status}</span>
+                        <span className="material-symbols-outlined text-[14px] text-slate-500">arrow_right_alt</span>
+                        <span className="px-2 py-0.5 bg-error/10 text-error text-[10px] rounded border border-error/20 font-bold">{item.issue}</span>
+                      </div>
+                      <p className="font-body-sm text-xs text-slate-400">Post-analysis revealed advanced evasion techniques bypassing initial heuristics.</p>
+                    </div>
+                  ))}
                 </div>
-                <ul className="space-y-3">
-                  <li className="flex items-center justify-between group/item">
-                    <div className="flex items-center gap-4">
-                      <div className="w-1.5 h-1.5 rounded-full bg-error shadow-[0_0_8px_rgba(255,180,171,0.5)]"></div>
-                      <span className="font-data-mono text-sm text-slate-200">Bot-Farm Signal: campaign_id_882</span>
+                {/* Duplicated for smooth scrolling */}
+                <div className="flex flex-col px-4 pt-4 gap-4">
+                  {[
+                    { title: "CryptoWallet Pro", status: "Flagged Safe", issue: "Malware Payload Detected", time: "2m ago" },
+                    { title: "SecureVPN Ext", status: "Clean Scan", issue: "Data Exfiltration", time: "15m ago" },
+                    { title: "DefiSwap Portal", status: "No Threat", issue: "Phishing Redirect", time: "1h ago" },
+                    { title: "AuthGuard App", status: "Trusted", issue: "Credential Harvesting", time: "3h ago" }
+                  ].map((item, i) => (
+                    <div key={`dup-${i}`} className="bg-white/5 border border-white/10 rounded-lg p-4 hover:bg-white/10 transition-colors shrink-0">
+                      <div className="flex justify-between items-start mb-2">
+                        <span className="font-bold text-white font-body-sm">{item.title}</span>
+                        <span className="font-data-mono text-[10px] text-slate-500">{item.time}</span>
+                      </div>
+                      <div className="flex items-center gap-2 mb-2">
+                        <span className="px-2 py-0.5 bg-green-500/10 text-green-400 text-[10px] rounded border border-green-500/20">{item.status}</span>
+                        <span className="material-symbols-outlined text-[14px] text-slate-500">arrow_right_alt</span>
+                        <span className="px-2 py-0.5 bg-error/10 text-error text-[10px] rounded border border-error/20 font-bold">{item.issue}</span>
+                      </div>
+                      <p className="font-body-sm text-xs text-slate-400">Post-analysis revealed advanced evasion techniques bypassing initial heuristics.</p>
                     </div>
-                    <span className="font-data-mono text-[10px] text-slate-500 uppercase">Singapore • Now</span>
-                  </li>
-                  <li className="flex items-center justify-between group/item">
-                    <div className="flex items-center gap-4">
-                      <div className="w-1.5 h-1.5 rounded-full bg-yellow-500 shadow-[0_0_8px_rgba(234,179,8,0.5)]"></div>
-                      <span className="font-data-mono text-sm text-slate-200">High-Velocity URL Creation</span>
-                    </div>
-                    <span className="font-data-mono text-[10px] text-slate-500 uppercase">London • 2m ago</span>
-                  </li>
-                  <li className="flex items-center justify-between group/item">
-                    <div className="flex items-center gap-4">
-                      <div className="w-1.5 h-1.5 rounded-full bg-blue-500 shadow-[0_0_8px_rgba(59,130,246,0.5)]"></div>
-                      <span className="font-data-mono text-sm text-slate-200">Coordinated Review Pattern</span>
-                    </div>
-                    <span className="font-data-mono text-[10px] text-slate-500 uppercase">Los Angeles • 5m ago</span>
-                  </li>
-                </ul>
+                  ))}
+                </div>
               </div>
             </div>
           </div>
 
-          {/* Risk Distribution */}
-          <div className="glass-panel col-span-12 md:col-span-4 rounded-2xl p-8 flex flex-col">
-            <div className="flex items-center gap-4 mb-10">
-              <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
-                <span className="material-symbols-outlined text-primary text-xl">security</span>
+          {/* False Positive Showcase */}
+          <div className="glass-panel col-span-12 md:col-span-6 rounded-2xl p-8 flex flex-col overflow-hidden relative">
+            <div className="flex justify-between items-center mb-8 relative z-10">
+              <div className="flex items-center gap-4">
+                <div className="w-10 h-10 rounded-full bg-green-500/10 flex items-center justify-center">
+                  <span className="material-symbols-outlined text-green-500 text-xl">verified_user</span>
+                </div>
+                <h2 className="font-h2 text-xl font-bold text-white uppercase tracking-wider">False Positive</h2>
               </div>
-              <h3 className="font-h3 text-xl font-bold text-white uppercase tracking-wider">Threat Topology</h3>
-            </div>
-            <div className="flex-1 flex flex-col justify-center space-y-8">
-              <div className="space-y-3">
-                <div className="flex justify-between items-end">
-                  <span className="font-label-caps text-[9px] font-bold uppercase tracking-[0.2em] text-slate-400">MALICIOUS CONTENT</span>
-                  <span className="font-data-mono text-sm text-white">42%</span>
-                </div>
-                <div className="h-1.5 bg-white/5 rounded-full overflow-hidden">
-                  <div className="h-full bg-error w-[42%] shadow-[0_0_10px_rgba(255,180,171,0.3)]"></div>
-                </div>
-              </div>
-              <div className="space-y-3">
-                <div className="flex justify-between items-end">
-                  <span className="font-label-caps text-[9px] font-bold uppercase tracking-[0.2em] text-slate-400">BOT COORDINATION</span>
-                  <span className="font-data-mono text-sm text-white">28%</span>
-                </div>
-                <div className="h-1.5 bg-white/5 rounded-full overflow-hidden">
-                  <div className="h-full bg-primary w-[28%] shadow-[0_0_10px_rgba(185,199,228,0.3)]"></div>
-                </div>
-              </div>
-              <div className="space-y-3">
-                <div className="flex justify-between items-end">
-                  <span className="font-label-caps text-[9px] font-bold uppercase tracking-[0.2em] text-slate-400">FINANCIAL FRAUD</span>
-                  <span className="font-data-mono text-sm text-white">19%</span>
-                </div>
-                <div className="h-1.5 bg-white/5 rounded-full overflow-hidden">
-                  <div className="h-full bg-yellow-600 w-[19%] shadow-[0_0_10px_rgba(202,138,4,0.3)]"></div>
-                </div>
-              </div>
-              <div className="space-y-3">
-                <div className="flex justify-between items-end">
-                  <span className="font-label-caps text-[9px] font-bold uppercase tracking-[0.2em] text-slate-400">OTHER SIGNALS</span>
-                  <span className="font-data-mono text-sm text-white">11%</span>
-                </div>
-                <div className="h-1.5 bg-white/5 rounded-full overflow-hidden">
-                  <div className="h-full bg-slate-600 w-[11%]"></div>
-                </div>
+              <div className="flex gap-3">
+                <span className="px-4 py-1.5 bg-green-500/10 text-green-400 border border-green-500/20 font-bold text-[9px] tracking-[0.15em] rounded-full uppercase">WRONGFULLY FLAGGED</span>
               </div>
             </div>
-            <div className="mt-12 pt-8 border-t border-white/5">
-              <button className="w-full bg-white/5 border border-white/10 py-4 rounded-xl font-bold uppercase tracking-[0.2em] text-[10px] text-slate-300 hover:bg-white/10 hover:text-white transition-all cursor-pointer">VIEW FULL TOPOLOGY</button>
+            
+            <div className="flex-1 min-h-[380px] relative overflow-hidden rounded-xl border border-white/5 bg-black/40">
+              <div className="absolute top-0 left-0 right-0 h-16 bg-gradient-to-b from-[#050507] to-transparent z-10 pointer-events-none"></div>
+              <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-[#050507] to-transparent z-10 pointer-events-none"></div>
+              
+              <div className="absolute w-full animate-scroll-vertical">
+                {/* First Set */}
+                <div className="flex flex-col px-4 pt-4 gap-4">
+                  {[
+                    { title: "IndieGame Studio", status: "Blocked", resolution: "Verified Authentic", time: "10m ago" },
+                    { title: "CharityFund DAO", status: "High Risk", resolution: "Legitimate Entity", time: "45m ago" },
+                    { title: "LocalNews Blog", status: "Bot Activity", resolution: "Organic Viral Traffic", time: "2h ago" },
+                    { title: "ArtisanMarket", status: "Scam Warning", resolution: "Secure Transactions", time: "5h ago" }
+                  ].map((item, i) => (
+                    <div key={i} className="bg-white/5 border border-white/10 rounded-lg p-4 hover:bg-white/10 transition-colors shrink-0">
+                      <div className="flex justify-between items-start mb-2">
+                        <span className="font-bold text-white font-body-sm">{item.title}</span>
+                        <span className="font-data-mono text-[10px] text-slate-500">{item.time}</span>
+                      </div>
+                      <div className="flex items-center gap-2 mb-2">
+                        <span className="px-2 py-0.5 bg-error/10 text-error text-[10px] rounded border border-error/20">{item.status}</span>
+                        <span className="material-symbols-outlined text-[14px] text-slate-500">arrow_right_alt</span>
+                        <span className="px-2 py-0.5 bg-green-500/10 text-green-400 text-[10px] rounded border border-green-500/20 font-bold">{item.resolution}</span>
+                      </div>
+                      <p className="font-body-sm text-xs text-slate-400">Manual review and extended behavioral context confirmed legitimate operations.</p>
+                    </div>
+                  ))}
+                </div>
+                {/* Duplicated for smooth scrolling */}
+                <div className="flex flex-col px-4 pt-4 gap-4">
+                  {[
+                    { title: "IndieGame Studio", status: "Blocked", resolution: "Verified Authentic", time: "10m ago" },
+                    { title: "CharityFund DAO", status: "High Risk", resolution: "Legitimate Entity", time: "45m ago" },
+                    { title: "LocalNews Blog", status: "Bot Activity", resolution: "Organic Viral Traffic", time: "2h ago" },
+                    { title: "ArtisanMarket", status: "Scam Warning", resolution: "Secure Transactions", time: "5h ago" }
+                  ].map((item, i) => (
+                    <div key={`dup-${i}`} className="bg-white/5 border border-white/10 rounded-lg p-4 hover:bg-white/10 transition-colors shrink-0">
+                      <div className="flex justify-between items-start mb-2">
+                        <span className="font-bold text-white font-body-sm">{item.title}</span>
+                        <span className="font-data-mono text-[10px] text-slate-500">{item.time}</span>
+                      </div>
+                      <div className="flex items-center gap-2 mb-2">
+                        <span className="px-2 py-0.5 bg-error/10 text-error text-[10px] rounded border border-error/20">{item.status}</span>
+                        <span className="material-symbols-outlined text-[14px] text-slate-500">arrow_right_alt</span>
+                        <span className="px-2 py-0.5 bg-green-500/10 text-green-400 text-[10px] rounded border border-green-500/20 font-bold">{item.resolution}</span>
+                      </div>
+                      <p className="font-body-sm text-xs text-slate-400">Manual review and extended behavioral context confirmed legitimate operations.</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
             </div>
           </div>
 
-          {/* Documentation Grid */}
-          <div className="col-span-12 grid grid-cols-1 md:grid-cols-3 gap-8 mt-4">
-            <div className="bg-white/5 border border-white/5 rounded-2xl p-8 hover:bg-white/[0.08] transition-all cursor-pointer group">
-              <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-                <span className="material-symbols-outlined text-primary">description</span>
+          {/* Clean Reviews Grid */}
+          <div className="col-span-12 mt-8">
+            <div className="flex items-center gap-4 mb-6">
+              <div className="w-10 h-10 rounded-full bg-green-500/10 flex items-center justify-center">
+                <span className="material-symbols-outlined text-green-500 text-xl">star</span>
               </div>
-              <h4 className="font-h3 text-lg text-white mb-3 font-bold">Deep Intelligence Reports</h4>
-              <p className="font-body-sm text-slate-400 mb-6 leading-relaxed">Read our latest whitepaper on cross-platform coordinated behavior.</p>
-              <a className="text-primary font-bold uppercase tracking-widest text-[10px] inline-flex items-center gap-2 group-hover:gap-4 transition-all" href="#">LEARN MORE <span className="material-symbols-outlined text-sm">arrow_forward</span></a>
+              <h2 className="font-h2 text-xl font-bold text-white uppercase tracking-wider">Product With Good Clean Review</h2>
             </div>
-            <div className="bg-white/5 border border-white/5 rounded-2xl p-8 hover:bg-white/[0.08] transition-all cursor-pointer group">
-              <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-                <span className="material-symbols-outlined text-primary">api</span>
+            
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              {/* Product 1 */}
+              <div className="bg-white/5 border border-white/5 rounded-2xl p-8 hover:bg-white/[0.08] transition-all cursor-pointer group flex flex-col">
+                <div className="flex items-start justify-between mb-6">
+                  <div className="w-12 h-12 rounded-xl bg-blue-500/10 flex items-center justify-center group-hover:scale-110 transition-transform">
+                    <span className="material-symbols-outlined text-blue-400 text-2xl">laptop_mac</span>
+                  </div>
+                  <div className="flex text-yellow-500">
+                    <span className="material-symbols-outlined text-sm">star</span>
+                    <span className="material-symbols-outlined text-sm">star</span>
+                    <span className="material-symbols-outlined text-sm">star</span>
+                    <span className="material-symbols-outlined text-sm">star</span>
+                    <span className="material-symbols-outlined text-sm">star</span>
+                  </div>
+                </div>
+                <h4 className="font-h3 text-lg text-white mb-2 font-bold">ZenBook Pro 15</h4>
+                <div className="flex items-center gap-2 mb-4">
+                  <span className="px-2 py-0.5 bg-green-500/10 text-green-400 text-[10px] rounded border border-green-500/20 font-bold uppercase">100% Verified Clean</span>
+                </div>
+                <div className="bg-black/40 rounded-xl p-4 mt-auto border border-white/5 relative">
+                  <span className="material-symbols-outlined absolute -top-3 -left-2 text-slate-600 text-3xl opacity-50">format_quote</span>
+                  <p className="font-body-sm text-slate-300 italic text-sm relative z-10">"Exceptional build quality and no bloatware out of the box. SentinelScan shows zero bundled adware or tracking telemetry."</p>
+                  <div className="flex items-center gap-2 mt-3 pt-3 border-t border-white/5">
+                    <div className="w-5 h-5 rounded-full bg-slate-700 flex items-center justify-center text-[10px] font-bold text-white">JD</div>
+                    <span className="text-[10px] text-slate-400">Verified Tech Reviewer</span>
+                  </div>
+                </div>
               </div>
-              <h4 className="font-h3 text-lg text-white mb-3 font-bold">Sentinel API v4.2</h4>
-              <p className="font-body-sm text-slate-400 mb-6 leading-relaxed">Integration docs for high-volume automated URL auditing.</p>
-              <a className="text-primary font-bold uppercase tracking-widest text-[10px] inline-flex items-center gap-2 group-hover:gap-4 transition-all" href="#">DOCS HUB <span className="material-symbols-outlined text-sm">arrow_forward</span></a>
-            </div>
-            <div className="bg-white/5 border border-white/5 rounded-2xl p-8 hover:bg-white/[0.08] transition-all cursor-pointer group">
-              <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-                <span className="material-symbols-outlined text-primary">shield</span>
+
+              {/* Product 2 */}
+              <div className="bg-white/5 border border-white/5 rounded-2xl p-8 hover:bg-white/[0.08] transition-all cursor-pointer group flex flex-col">
+                <div className="flex items-start justify-between mb-6">
+                  <div className="w-12 h-12 rounded-xl bg-purple-500/10 flex items-center justify-center group-hover:scale-110 transition-transform">
+                    <span className="material-symbols-outlined text-purple-400 text-2xl">router</span>
+                  </div>
+                  <div className="flex text-yellow-500">
+                    <span className="material-symbols-outlined text-sm">star</span>
+                    <span className="material-symbols-outlined text-sm">star</span>
+                    <span className="material-symbols-outlined text-sm">star</span>
+                    <span className="material-symbols-outlined text-sm">star</span>
+                    <span className="material-symbols-outlined text-sm">star</span>
+                  </div>
+                </div>
+                <h4 className="font-h3 text-lg text-white mb-2 font-bold">NetGuard Mesh WiFi</h4>
+                <div className="flex items-center gap-2 mb-4">
+                  <span className="px-2 py-0.5 bg-green-500/10 text-green-400 text-[10px] rounded border border-green-500/20 font-bold uppercase">No Hidden Backdoors</span>
+                </div>
+                <div className="bg-black/40 rounded-xl p-4 mt-auto border border-white/5 relative">
+                  <span className="material-symbols-outlined absolute -top-3 -left-2 text-slate-600 text-3xl opacity-50">format_quote</span>
+                  <p className="font-body-sm text-slate-300 italic text-sm relative z-10">"Thoroughly audited the firmware. It's completely open-source and respects user privacy without sending traffic data to third-party servers."</p>
+                  <div className="flex items-center gap-2 mt-3 pt-3 border-t border-white/5">
+                    <div className="w-5 h-5 rounded-full bg-slate-700 flex items-center justify-center text-[10px] font-bold text-white">SA</div>
+                    <span className="text-[10px] text-slate-400">Security Analyst</span>
+                  </div>
+                </div>
               </div>
-              <h4 className="font-h3 text-lg text-white mb-3 font-bold">Zero-Trust Auditing</h4>
-              <p className="font-body-sm text-slate-400 mb-6 leading-relaxed">Our methodology for ensuring neutrality in automated reviews.</p>
-              <a className="text-primary font-bold uppercase tracking-widest text-[10px] inline-flex items-center gap-2 group-hover:gap-4 transition-all" href="#">THE PROTOCOL <span className="material-symbols-outlined text-sm">arrow_forward</span></a>
+
+              {/* Product 3 */}
+              <div className="bg-white/5 border border-white/5 rounded-2xl p-8 hover:bg-white/[0.08] transition-all cursor-pointer group flex flex-col">
+                <div className="flex items-start justify-between mb-6">
+                  <div className="w-12 h-12 rounded-xl bg-orange-500/10 flex items-center justify-center group-hover:scale-110 transition-transform">
+                    <span className="material-symbols-outlined text-orange-400 text-2xl">account_balance_wallet</span>
+                  </div>
+                  <div className="flex text-yellow-500">
+                    <span className="material-symbols-outlined text-sm">star</span>
+                    <span className="material-symbols-outlined text-sm">star</span>
+                    <span className="material-symbols-outlined text-sm">star</span>
+                    <span className="material-symbols-outlined text-sm">star</span>
+                    <span className="material-symbols-outlined text-sm">star</span>
+                  </div>
+                </div>
+                <h4 className="font-h3 text-lg text-white mb-2 font-bold">Aegis Crypto Wallet</h4>
+                <div className="flex items-center gap-2 mb-4">
+                  <span className="px-2 py-0.5 bg-green-500/10 text-green-400 text-[10px] rounded border border-green-500/20 font-bold uppercase">Audited Smart Contracts</span>
+                </div>
+                <div className="bg-black/40 rounded-xl p-4 mt-auto border border-white/5 relative">
+                  <span className="material-symbols-outlined absolute -top-3 -left-2 text-slate-600 text-3xl opacity-50">format_quote</span>
+                  <p className="font-body-sm text-slate-300 italic text-sm relative z-10">"100% clean record. Multi-sig architecture is flawless, and the community audits show no vulnerabilities or malicious intents."</p>
+                  <div className="flex items-center gap-2 mt-3 pt-3 border-t border-white/5">
+                    <div className="w-5 h-5 rounded-full bg-slate-700 flex items-center justify-center text-[10px] font-bold text-white">MK</div>
+                    <span className="text-[10px] text-slate-400">DeFi Enthusiast</span>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
