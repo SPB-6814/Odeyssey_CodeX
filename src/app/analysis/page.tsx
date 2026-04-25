@@ -1,5 +1,6 @@
 "use client";
-import { use } from "react";
+import { use, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { BentoBox } from "@/components/ui/BentoBox";
 import AutoScrollFeed from "@/components/AutoScrollFeed";
 import { Line, Bar } from 'react-chartjs-2';
@@ -15,7 +16,7 @@ import {
   Legend,
   ArcElement,
 } from 'chart.js';
-import { Star, Users, TrendingUp, AlertTriangle, Package, Award } from "lucide-react";
+import { Star, Users, TrendingUp, AlertTriangle, Package, Award, Scale } from "lucide-react";
 
 ChartJS.register(
   CategoryScale,
@@ -89,6 +90,7 @@ const commonIssues = [
 export default function AnalysisPage({ searchParams }: { searchParams: Promise<{ url?: string }> }) {
   const params = use(searchParams);
   const auditUrl = params?.url || "Unknown Product";
+  const [compareMode, setCompareMode] = useState(false);
 
   return (
     <main className="min-h-screen p-[var(--spacing-margin)] max-w-[1600px] mx-auto w-full relative z-10">
@@ -101,12 +103,43 @@ export default function AnalysisPage({ searchParams }: { searchParams: Promise<{
           <p className="text-body-lg text-on-surface-variant mt-1 font-data-mono">Target: {auditUrl}</p>
         </div>
         <div className="flex items-center gap-4">
+          <button 
+            onClick={() => setCompareMode(!compareMode)}
+            className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-bold transition-all border ${
+              compareMode 
+                ? 'bg-primary/20 text-primary border-primary' 
+                : 'bg-surface-container text-on-surface border-outline-variant/30 hover:bg-white/5'
+            }`}
+          >
+            <Scale className="w-4 h-4" />
+            Compare
+          </button>
           <div className="flex items-center gap-2 bg-surface-container px-4 py-2 rounded-full border border-outline-variant/30">
             <span className="w-2 h-2 rounded-full bg-signal-green shadow-[0_0_8px_var(--color-signal-green)] animate-pulse" />
             <span className="text-label-caps text-on-surface">Analysis Complete</span>
           </div>
         </div>
       </header>
+
+      {/* COMPARE BANNER */}
+      <AnimatePresence>
+        {compareMode && (
+          <motion.div 
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            className="mb-8 bg-surface-container border border-primary/50 rounded-xl p-4 flex items-center justify-between"
+          >
+            <span className="text-on-surface text-sm font-bold flex items-center gap-2">
+              <span className="flex items-center justify-center w-6 h-6 rounded-full bg-primary/20 text-primary">0</span>
+              Items Selected for Comparison
+            </span>
+            <button className="bg-primary text-on-primary px-6 py-2 rounded-lg text-sm font-bold hover:brightness-110 transition-all shadow-lg shadow-primary/20">
+              Run Comparison
+            </button>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* Dashboard Grid */}
       <div className="grid grid-cols-1 md:grid-cols-12 gap-[var(--spacing-bento-gap)] auto-rows-min">

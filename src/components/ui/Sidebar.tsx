@@ -4,8 +4,8 @@ import { usePathname } from "next/navigation";
 
 export function Sidebar() {
   const pathname = usePathname();
-  const showRecent = pathname.startsWith('/analysis');
-  const showMainNav = pathname.startsWith('/analysis');
+  const showRecent = pathname.startsWith('/analysis') || pathname.startsWith('/feed');
+  const showMainNav = pathname.startsWith('/analysis') || pathname.startsWith('/feed');
 
   return (
     <aside className="fixed left-0 top-16 h-[calc(100vh-64px)] w-64 flex flex-col bg-slate-950/40 backdrop-blur-md border-r border-white/5 z-40 hidden md:flex">
@@ -30,12 +30,26 @@ export function Sidebar() {
           {/* Main Navigation */}
           {showMainNav && (
             <nav className="space-y-2 shrink-0">
-              <a className="flex items-center gap-4 px-4 py-3 bg-white/5 text-white rounded-lg font-inter text-[10px] font-bold uppercase tracking-[0.2em] transition-all group" href="#">
-                <span className="material-symbols-outlined text-sm text-primary group-hover:scale-110 transition-transform">analytics</span>
+              <a 
+                href="/analysis"
+                className={`flex items-center gap-4 px-4 py-3 rounded-lg font-inter text-[10px] font-bold uppercase tracking-[0.2em] transition-all group ${
+                  pathname.startsWith('/analysis') 
+                    ? 'bg-white/5 text-white' 
+                    : 'text-slate-500 hover:text-slate-200 hover:bg-white/[0.02]'
+                }`} 
+              >
+                <span className={`material-symbols-outlined text-sm transition-transform ${pathname.startsWith('/analysis') ? 'text-primary' : 'group-hover:scale-110'}`}>analytics</span>
                 Analytics
               </a>
-              <a className="flex items-center gap-4 px-4 py-3 text-slate-500 hover:text-slate-200 hover:bg-white/[0.02] rounded-lg font-inter text-[10px] font-bold uppercase tracking-[0.2em] transition-all group" href="#">
-                <span className="material-symbols-outlined text-sm group-hover:scale-110 transition-transform">feed</span>
+              <a 
+                href="/feed"
+                className={`flex items-center gap-4 px-4 py-3 rounded-lg font-inter text-[10px] font-bold uppercase tracking-[0.2em] transition-all group ${
+                  pathname.startsWith('/feed') 
+                    ? 'bg-white/5 text-white' 
+                    : 'text-slate-500 hover:text-slate-200 hover:bg-white/[0.02]'
+                }`}
+              >
+                <span className={`material-symbols-outlined text-sm transition-transform ${pathname.startsWith('/feed') ? 'text-primary' : 'group-hover:scale-110'}`}>feed</span>
                 Feed
               </a>
             </nav>
