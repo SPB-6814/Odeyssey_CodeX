@@ -60,20 +60,12 @@ export default function RootLayout({
             </div>
             <nav className="space-y-2">
               <a className="flex items-center gap-4 px-4 py-3 bg-white/5 text-white rounded-lg font-inter text-[10px] font-bold uppercase tracking-[0.2em] transition-all group" href="#">
-                <span className="material-symbols-outlined text-sm text-primary group-hover:scale-110 transition-transform">dashboard</span>
-                Overview
+                <span className="material-symbols-outlined text-sm text-primary group-hover:scale-110 transition-transform">Analytics</span>
+                Analytics
               </a>
               <a className="flex items-center gap-4 px-4 py-3 text-slate-500 hover:text-slate-200 hover:bg-white/[0.02] rounded-lg font-inter text-[10px] font-bold uppercase tracking-[0.2em] transition-all group" href="#">
-                <span className="material-symbols-outlined text-sm group-hover:scale-110 transition-transform">query_stats</span>
-                Signal Analysis
-              </a>
-              <a className="flex items-center gap-4 px-4 py-3 text-slate-500 hover:text-slate-200 hover:bg-white/[0.02] rounded-lg font-inter text-[10px] font-bold uppercase tracking-[0.2em] transition-all group" href="#">
-                <span className="material-symbols-outlined text-sm group-hover:scale-110 transition-transform">hub</span>
-                Coordination Map
-              </a>
-              <a className="flex items-center gap-4 px-4 py-3 text-slate-500 hover:text-slate-200 hover:bg-white/[0.02] rounded-lg font-inter text-[10px] font-bold uppercase tracking-[0.2em] transition-all group" href="#">
-                <span className="material-symbols-outlined text-sm group-hover:scale-110 transition-transform">fingerprint</span>
-                Reviewer DNA
+                <span className="material-symbols-outlined text-sm group-hover:scale-110 transition-transform">Feed</span>
+                Feed
               </a>
             </nav>
           </div>
