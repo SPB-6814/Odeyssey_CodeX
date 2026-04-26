@@ -78,7 +78,7 @@ export function Sidebar() {
         </div>
       </div>
       <div className="mt-auto p-8 border-t border-white/5 bg-black/20 shrink-0">
-        <button className="w-full bg-primary text-on-primary font-label-caps text-[11px] py-4 rounded-lg tracking-[0.2em] uppercase mb-8 hover:brightness-110 shadow-lg shadow-primary/20 transition-all">Export Report</button>
+
         <div className="space-y-4">
           <a className="flex items-center gap-4 px-2 text-slate-500 hover:text-slate-200 font-inter text-[10px] font-bold uppercase tracking-[0.2em] transition-all" href="#">
             <span className="material-symbols-outlined text-sm">verified_user</span>
