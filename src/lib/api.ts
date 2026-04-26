@@ -1,10 +1,12 @@
 /**
  * API client for the Fake Review Detector backend.
- * Exports `analyzeProduct(url)` which POSTs to the FastAPI backend
- * and returns a strongly-typed AnalysisResult.
+ * All requests go through the Next.js API proxy at /api/analyze
+ * which forwards to the Railway FastAPI backend server-side.
+ * This avoids CORS issues and keeps BACKEND_URL secret.
  */
 
-const API_BASE_URL = (process.env.NEXT_PUBLIC_API_BASE_URL || "").replace(/\/$/, "");
+// Always use the relative proxy path — works on localhost and Vercel
+const API_BASE_URL = "";
 
 // ─── Types matching backend schemas.py ──────────────────────────────────────
 

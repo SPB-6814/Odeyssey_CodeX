@@ -1,11 +1,9 @@
 import { NextResponse } from "next/server";
 
-const DEFAULT_BACKEND_CANDIDATES = [
-  "http://127.0.0.1:8000",
-  "http://localhost:8000",
-];
+const IS_PROD = process.env.NODE_ENV === "production";
 
-function getBackendCandidates() {
+function getBackendCandidates(): string[] {
+  // Collect all env-provided URLs (server-side only, never exposed to browser)
   const fromEnv = [
     process.env.BACKEND_URL,
     process.env.NEXT_PUBLIC_BACKEND_URL,
@@ -14,7 +12,22 @@ function getBackendCandidates() {
     .map((v) => (v || "").trim().replace(/\/$/, ""))
     .filter(Boolean);
 
-  return [...new Set([...fromEnv, ...DEFAULT_BACKEND_CANDIDATES])];
+  if (fromEnv.length === 0) {
+    if (IS_PROD) {
+      console.error(
+        "[API Proxy] BACKEND_URL is not set. Set it in Vercel Environment Variables."
+      );
+    }
+    // In development, fall back to local FastAPI server
+    return ["http://127.0.0.1:8000", "http://localhost:8000"];
+  }
+
+  // In production, NEVER append localhost — it will always fail on Vercel
+  const localhostFallbacks = IS_PROD
+    ? []
+    : ["http://127.0.0.1:8000", "http://localhost:8000"];
+
+  return [...new Set([...fromEnv, ...localhostFallbacks])];
 }
 
 export async function POST(req: Request) {
