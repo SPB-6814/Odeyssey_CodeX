@@ -104,18 +104,7 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
           >
             Live Pulse
           </a>
-          <a
-            className="font-inter text-[11px] font-semibold uppercase tracking-[0.2em] text-slate-400 hover:text-white transition-all duration-300"
-            href="#"
-          >
-            Audits
-          </a>
-          <a
-            className="font-inter text-[11px] font-semibold uppercase tracking-[0.2em] text-slate-400 hover:text-white transition-all duration-300"
-            href="#"
-          >
-            Documentation
-          </a>
+
         </nav>
 
         <div className="flex items-center gap-6">
