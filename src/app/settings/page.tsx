@@ -3,9 +3,11 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { useAuth } from "@/contexts/AuthContext";
 
 export default function SettingsPage() {
   const router = useRouter();
+  const { user, loading } = useAuth();
   const [notifications, setNotifications] = useState(true);
   const [darkMode, setDarkMode] = useState(true);
   const [autoScan, setAutoScan] = useState(false);
@@ -13,8 +15,9 @@ export default function SettingsPage() {
   const [saved, setSaved] = useState(false);
 
   useEffect(() => {
-    if (!localStorage.getItem("userName")) {
+    if (!loading && !user) {
       router.replace("/auth");
+      return;
     }
     // Load preferences if stored
     const prefs = localStorage.getItem("userPrefs");
@@ -25,13 +28,23 @@ export default function SettingsPage() {
       setAutoScan(p.autoScan ?? false);
       setTwoFA(p.twoFA ?? false);
     }
-  }, [router]);
+  }, [loading, user, router]);
 
   const handleSave = () => {
     localStorage.setItem("userPrefs", JSON.stringify({ notifications, darkMode, autoScan, twoFA }));
     setSaved(true);
     setTimeout(() => setSaved(false), 2000);
   };
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="w-10 h-10 border-2 border-primary/30 border-t-primary rounded-full animate-spin" />
+      </div>
+    );
+  }
+
+  if (!user) return null;
 
   const Toggle = ({ on, onToggle, label, description, icon }: {
     on: boolean; onToggle: () => void; label: string; description: string; icon: string;

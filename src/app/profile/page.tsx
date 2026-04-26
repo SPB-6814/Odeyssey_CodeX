@@ -1,24 +1,33 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { useAuth } from "@/contexts/AuthContext";
 
 export default function ProfilePage() {
   const router = useRouter();
-  const [userName, setUserName] = useState("");
-  const [userEmail, setUserEmail] = useState("");
+  const { user, loading } = useAuth();
 
   useEffect(() => {
-    const name = localStorage.getItem("userName") || "";
-    const email = localStorage.getItem("userEmail") || "";
-    if (!name) {
+    if (!loading && !user) {
       router.replace("/auth");
-      return;
     }
-    setUserName(name);
-    setUserEmail(email);
-  }, [router]);
+  }, [loading, user, router]);
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="w-10 h-10 border-2 border-primary/30 border-t-primary rounded-full animate-spin" />
+      </div>
+    );
+  }
+
+  if (!user) return null;
+
+  const displayName = user.displayName || user.email?.split("@")[0] || "Analyst";
+  const photoURL = user.photoURL || null;
+  const initial = displayName.charAt(0).toUpperCase();
 
   return (
     <div className="min-h-screen bg-[#050507] flex items-center justify-center relative overflow-hidden px-4">
@@ -40,11 +49,18 @@ export default function ProfilePage() {
           {/* Avatar */}
           <div className="flex flex-col items-center mb-8">
             <div className="w-20 h-20 rounded-full overflow-hidden border-2 border-primary/40 mb-4 shadow-lg shadow-primary/20">
-              <img
-                alt="Profile avatar"
-                className="w-full h-full object-cover"
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuCFJaeJjheWwFJPaNG221m4vRhva6BBtfsru-ugVbD5aUV2RzX0Ze04GfP6EDyALxROf-IT07KZowf_asetH_pur9rhl6B-SeN6o-3CXhGNeX0cNJDP4ssvxRFZLD6lIPYBuKlloXJBDKlCn4v7t9ddWxYccEStsWV1pwJqUVG8PY6nW5ljuF3f-hZiKEPKM3wrad9kYZ4srBSZCLqBd8HVjZXfSXqs_mWfx1ryWKRlUChSnv5EJT9WLyr7qRWf1W-0iuh7-hFSYY5V"
-              />
+              {photoURL ? (
+                <img
+                  alt="Profile avatar"
+                  className="w-full h-full object-cover"
+                  src={photoURL}
+                  referrerPolicy="no-referrer"
+                />
+              ) : (
+                <div className="w-full h-full bg-primary/20 flex items-center justify-center text-primary text-3xl font-bold">
+                  {initial}
+                </div>
+              )}
             </div>
             <span className="px-3 py-1 bg-green-500/10 border border-green-500/20 text-green-400 text-[10px] font-bold uppercase tracking-widest rounded-full">
               Active Analyst
@@ -55,15 +71,21 @@ export default function ProfilePage() {
           <div className="space-y-4 mb-8">
             <div className="bg-black/30 border border-white/5 rounded-xl p-4">
               <p className="text-[10px] uppercase tracking-widest font-bold text-slate-500 mb-1">Full Name</p>
-              <p className="text-white font-bold text-base">{userName || "—"}</p>
+              <p className="text-white font-bold text-base">{displayName}</p>
             </div>
             <div className="bg-black/30 border border-white/5 rounded-xl p-4">
               <p className="text-[10px] uppercase tracking-widest font-bold text-slate-500 mb-1">Email Address</p>
-              <p className="text-white font-bold text-base">{userEmail || "—"}</p>
+              <p className="text-white font-bold text-base">{user.email || "—"}</p>
             </div>
             <div className="bg-black/30 border border-white/5 rounded-xl p-4">
               <p className="text-[10px] uppercase tracking-widest font-bold text-slate-500 mb-1">Account Type</p>
               <p className="text-white font-bold text-base">Sentinel Analyst</p>
+            </div>
+            <div className="bg-black/30 border border-white/5 rounded-xl p-4">
+              <p className="text-[10px] uppercase tracking-widest font-bold text-slate-500 mb-1">Sign-In Provider</p>
+              <p className="text-white font-bold text-base capitalize">
+                {user.providerData[0]?.providerId === "google.com" ? "Google" : "Email / Password"}
+              </p>
             </div>
           </div>
 

@@ -108,6 +108,17 @@ def _reviewer_id(name: str, index: int) -> str:
     return hashlib.md5(f"{name}_{index}".encode()).hexdigest()[:10]
 
 
+def _safe_parse_total(match, fallback: int) -> int:
+    """Safely parse total review/rating count from regex match."""
+    if not match:
+        return fallback
+    try:
+        raw = match.group(1).replace(",", "").strip()
+        return int(raw) if raw else fallback
+    except (ValueError, IndexError):
+        return fallback
+
+
 def _extract_amazon_asin(url: str) -> Optional[str]:
     """Extracts 10-char ASIN from common Amazon URL patterns."""
     patterns = [
@@ -155,17 +166,38 @@ def _flipkart_reviews_url(url: str) -> Optional[str]:
 
 def _product_name_from_url(url: str) -> str:
     """Best-effort product name from URL slug if page parsing is blocked."""
+    url_lower = url.lower()
+
+    # Flipkart-style /p/... product path with readable slug before /p/
+    if "/p/" in url_lower:
+        prefix = url.split("/p/")[0]
+        slug = prefix.rsplit("/", 1)[-1]
+        slug = re.sub(r"[-_]+", " ", slug)
+        slug = re.sub(r"\b(?:men|women|kids|product|items?)\b", "", slug, flags=re.I)
+        slug = re.sub(r"\s+", " ", slug).strip()
+        if slug:
+            return slug.title()
+
+    # Myntra/Ajio style product slug in path segments
     path_match = re.search(r"https?://[^/]+/([^?]+)", url)
     if not path_match:
         return "Unknown Product"
 
-    slug_path = path_match.group(1)
-    slug = slug_path.split("/p/")[0].split("/")[-1]
+    path = path_match.group(1)
+    segments = [segment for segment in path.split("/") if segment]
+    slug = ""
+    for segment in reversed(segments):
+        if re.search(r"\d{6,}", segment):
+            continue
+        if segment.lower() in {"buy", "p"}:
+            continue
+        slug = segment
+        break
+
     slug = re.sub(r"[-_]+", " ", slug)
+    slug = re.sub(r"\b(?:men|women|kids|product|shirt|shirts|dress|watch|shoes|jeans)\b", r"\g<0>", slug, flags=re.I)
     slug = re.sub(r"\s+", " ", slug).strip()
-    if not slug:
-        return "Unknown Product"
-    return slug.title()
+    return slug.title() if slug else "Unknown Product"
 
 
 def _blocked_site_fallback_reviews(product_name: str, count: int = 16) -> list[RawReview]:
@@ -193,6 +225,40 @@ def _blocked_site_fallback_reviews(product_name: str, count: int = 16) -> list[R
             )
         )
     return reviews
+
+
+def _marketplace_blocked_fallback(url: str, site_key: str, last_product_meta: Optional[dict[str, Any]] = None) -> dict[str, Any]:
+    """Generic fallback for marketplaces that block scraping but still need a usable result."""
+    parsed_name = (last_product_meta or {}).get("name") or ""
+    fallback_name = parsed_name if parsed_name and parsed_name.lower() != "unknown product" else _product_name_from_url(url)
+    fallback_category = (last_product_meta or {}).get("category")
+
+    if not fallback_category:
+        if site_key in {"myntra"}:
+            fallback_category = "Apparel"
+        elif site_key in {"ajio"}:
+            fallback_category = "Fashion"
+        elif site_key in {"meesho"}:
+            fallback_category = "Marketplace Goods"
+        else:
+            fallback_category = "Electronics"
+
+    fallback_product = {
+        "name": fallback_name,
+        "category": fallback_category,
+        "original_rating": float((last_product_meta or {}).get("original_rating") or 4.0),
+        "total_reviews": int((last_product_meta or {}).get("total_reviews") or 500),
+    }
+    fallback_reviews = _blocked_site_fallback_reviews(fallback_name)
+    logger.warning(
+        f"[{site_key}-blocked-fallback] Returning {len(fallback_reviews)} generated reviews due to anti-bot blocking"
+    )
+    return {
+        "product": fallback_product,
+        "reviews": fallback_reviews,
+        "_genuine_ids": set(),
+        "_tier": f"{site_key}_blocked_fallback",
+    }
 
 
 def _extract_reviews_from_embedded_json(html: str, max_reviews: int = 40) -> list[RawReview]:
@@ -355,7 +421,9 @@ def _product_from_soup(soup: BeautifulSoup, selectors: dict, url: str) -> dict:
             name_el = soup.select_one(sel.strip())
             if name_el:
                 break
-    product_name = _clean(name_el.get_text()) if name_el else "Unknown Product"
+    product_name = _clean(name_el.get_text()) if name_el else _product_name_from_url(url)
+    if not product_name or product_name.lower() == "unknown product":
+        product_name = _product_name_from_url(url)
 
     rating_el = soup.select_one(selectors["original_rating"]) if selectors.get("original_rating") else None
     if rating_el:
@@ -551,9 +619,8 @@ async def _scrape_with_playwright_async(url: str, selectors: dict, site_key: str
         logger.info(f"[Tier 1] Extracted {len(reviews)} reviews from DOM")
 
     # Try to extract total review count from page text
-    total_match = re.search(r"([\d,]+)\s+(?:global\s+)?(?:ratings?|reviews?)", html, re.IGNORECASE)
-    total = int(total_match.group(1).replace(",", "")) if total_match else max(len(reviews) * 15, 100)
-    product_meta["total_reviews"] = total
+    total_match = re.search(r"([\d][\d,]*)\s+(?:global\s+)?(?:ratings?|reviews?)", html, re.IGNORECASE)
+    product_meta["total_reviews"] = _safe_parse_total(total_match, max(len(reviews) * 15, 100))
 
     return {
         "product": product_meta,
@@ -696,11 +763,8 @@ def _scrape_static(url: str, selectors: dict) -> dict[str, Any]:
     if not reviews:
         reviews = _extract_reviews_from_embedded_json(resp.text)
 
-    total_match = re.search(r"([\d,]+)\s+(?:global\s+)?(?:ratings?|reviews?)", resp.text, re.IGNORECASE)
-    product_meta["total_reviews"] = (
-        int(total_match.group(1).replace(",", "")) if total_match
-        else max(len(reviews) * 10, 50)
-    )
+    total_match = re.search(r"([\d][\d,]*)\s+(?:global\s+)?(?:ratings?|reviews?)", resp.text, re.IGNORECASE)
+    product_meta["total_reviews"] = _safe_parse_total(total_match, max(len(reviews) * 10, 50))
 
     return {
         "product": product_meta,
@@ -796,27 +860,10 @@ def scrape_product_live(url: str) -> dict[str, Any]:
         logger.info(f"[Tier 3] Demo mock returned {len(mock['reviews'])} reviews")
         return mock
 
-    # Anti-bot recovery for Flipkart: return product-level result with generated
-    # sample reviews instead of hard failure.
-    if site_key == "flipkart":
-        parsed_name = (last_product_meta or {}).get("name") or ""
-        fallback_name = parsed_name if parsed_name and parsed_name.lower() != "unknown product" else _product_name_from_url(url)
-        fallback_product = {
-            "name": fallback_name,
-            "category": (last_product_meta or {}).get("category") or "Electronics",
-            "original_rating": float((last_product_meta or {}).get("original_rating") or 4.0),
-            "total_reviews": int((last_product_meta or {}).get("total_reviews") or 500),
-        }
-        fallback_reviews = _blocked_site_fallback_reviews(fallback_name)
-        logger.warning(
-            f"[flipkart-blocked-fallback] Returning {len(fallback_reviews)} generated reviews due to anti-bot blocking"
-        )
-        return {
-            "product": fallback_product,
-            "reviews": fallback_reviews,
-            "_genuine_ids": set(),
-            "_tier": "flipkart_blocked_fallback",
-        }
+    # Anti-bot recovery: return product-level result with generated
+    # sample reviews instead of hard failure for all supported marketplaces.
+    if site_key in {"amazon", "flipkart", "meesho", "myntra", "ajio"}:
+        return _marketplace_blocked_fallback(url, site_key, last_product_meta)
 
     # If we reach here with no data, raise so the router can use scraper.py random mock
     raise RuntimeError(

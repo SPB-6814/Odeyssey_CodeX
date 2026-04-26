@@ -1,11 +1,22 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import {
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
+  signInWithPopup,
+  GoogleAuthProvider,
+  updateProfile,
+} from "firebase/auth";
+import { auth } from "@/lib/firebase";
+import { useAuth } from "@/contexts/AuthContext";
 
 export default function AuthPage() {
   const router = useRouter();
+  const { user } = useAuth();
+
   const [isLogin, setIsLogin] = useState(true);
   
   // Form state
@@ -13,6 +24,21 @@ export default function AuthPage() {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [name, setName] = useState("");
+
+  // UI state
+  const [submitting, setSubmitting] = useState(false);
+  const [errorMsg, setErrorMsg] = useState<string | null>(null);
+
+  // Redirect if already authenticated
+  useEffect(() => {
+    if (user) {
+      router.replace("/");
+    }
+  }, [user, router]);
+
+  if (user) {
+    return null;
+  }
 
   // Validation logic
   const hasMinLength = password.length >= 8;
@@ -24,24 +50,68 @@ export default function AuthPage() {
   const isValidSignup = hasMinLength && hasUppercase && hasNumber && hasSpecial && passwordsMatch && email.includes("@") && name.length > 0;
   const isValidLogin = email.includes("@") && password.length > 0;
 
-  const handleSubmit = (e: React.FormEvent) => {
+  // ── Firebase error → user-friendly message ──
+  function friendlyError(code: string): string {
+    switch (code) {
+      case "auth/invalid-email":
+        return "Invalid email address format.";
+      case "auth/user-disabled":
+        return "This account has been disabled.";
+      case "auth/user-not-found":
+        return "No account found with this email.";
+      case "auth/wrong-password":
+        return "Incorrect password. Try again.";
+      case "auth/invalid-credential":
+        return "Invalid credentials. Check your email and password.";
+      case "auth/email-already-in-use":
+        return "An account with this email already exists.";
+      case "auth/weak-password":
+        return "Password is too weak. Use at least 8 characters.";
+      case "auth/too-many-requests":
+        return "Too many attempts. Please wait a moment.";
+      case "auth/popup-closed-by-user":
+        return "Sign-in popup was closed. Try again.";
+      case "auth/network-request-failed":
+        return "Network error. Check your connection.";
+      default:
+        return "Authentication failed. Please try again.";
+    }
+  }
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (isLogin && isValidLogin) {
-      const mockName = email.split('@')[0] || "Analyst";
-      localStorage.setItem("userName", mockName);
-      localStorage.setItem("userEmail", email);
+    setErrorMsg(null);
+    setSubmitting(true);
+
+    try {
+      if (isLogin && isValidLogin) {
+        await signInWithEmailAndPassword(auth, email, password);
+      } else if (!isLogin && isValidSignup) {
+        const cred = await createUserWithEmailAndPassword(auth, email, password);
+        await updateProfile(cred.user, { displayName: name });
+      }
       router.push("/");
-    } else if (!isLogin && isValidSignup) {
-      localStorage.setItem("userName", name);
-      localStorage.setItem("userEmail", email);
-      router.push("/");
+    } catch (err: unknown) {
+      const code = (err as { code?: string })?.code || "";
+      setErrorMsg(friendlyError(code));
+    } finally {
+      setSubmitting(false);
     }
   };
 
-  const handleGoogleAuth = () => {
-    // Mock Google auth success
-    localStorage.setItem("userName", "Google User");
-    router.push("/");
+  const handleGoogleAuth = async () => {
+    setErrorMsg(null);
+    setSubmitting(true);
+    try {
+      const provider = new GoogleAuthProvider();
+      await signInWithPopup(auth, provider);
+      router.push("/");
+    } catch (err: unknown) {
+      const code = (err as { code?: string })?.code || "";
+      setErrorMsg(friendlyError(code));
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -75,16 +145,24 @@ export default function AuthPage() {
             </p>
           </div>
 
+          {/* Error Banner */}
+          {errorMsg && (
+            <div className="mb-6 flex items-center gap-3 bg-error/10 border border-error/20 rounded-xl px-4 py-3 animate-[fadeIn_0.2s_ease-out]">
+              <span className="material-symbols-outlined text-error text-xl shrink-0">error</span>
+              <p className="text-error text-sm font-medium">{errorMsg}</p>
+            </div>
+          )}
+
           {/* Toggle */}
           <div className="flex p-1 bg-black/40 rounded-lg mb-8 border border-white/5">
             <button 
-              onClick={() => setIsLogin(true)}
+              onClick={() => { setIsLogin(true); setErrorMsg(null); }}
               className={`flex-1 py-2 text-sm font-bold uppercase tracking-wider rounded-md transition-all ${isLogin ? 'bg-white/10 text-white shadow-sm' : 'text-slate-500 hover:text-slate-300'}`}
             >
               Sign In
             </button>
             <button 
-              onClick={() => setIsLogin(false)}
+              onClick={() => { setIsLogin(false); setErrorMsg(null); }}
               className={`flex-1 py-2 text-sm font-bold uppercase tracking-wider rounded-md transition-all ${!isLogin ? 'bg-white/10 text-white shadow-sm' : 'text-slate-500 hover:text-slate-300'}`}
             >
               Sign Up
@@ -104,6 +182,7 @@ export default function AuthPage() {
                     className="w-full bg-black/40 border border-white/10 rounded-xl py-3 pl-12 pr-4 text-white placeholder:text-slate-600 focus:outline-none focus:border-primary/50 focus:ring-1 focus:ring-primary/50 transition-all font-body-sm"
                     placeholder="John Doe"
                     required={!isLogin}
+                    disabled={submitting}
                   />
                 </div>
               </div>
@@ -120,6 +199,7 @@ export default function AuthPage() {
                   className="w-full bg-black/40 border border-white/10 rounded-xl py-3 pl-12 pr-4 text-white placeholder:text-slate-600 focus:outline-none focus:border-primary/50 focus:ring-1 focus:ring-primary/50 transition-all font-body-sm"
                   placeholder="analyst@sentinel.com"
                   required
+                  disabled={submitting}
                 />
               </div>
             </div>
@@ -135,6 +215,7 @@ export default function AuthPage() {
                   className="w-full bg-black/40 border border-white/10 rounded-xl py-3 pl-12 pr-4 text-white placeholder:text-slate-600 focus:outline-none focus:border-primary/50 focus:ring-1 focus:ring-primary/50 transition-all font-body-sm"
                   placeholder="••••••••"
                   required
+                  disabled={submitting}
                 />
               </div>
             </div>
@@ -152,6 +233,7 @@ export default function AuthPage() {
                       className={`w-full bg-black/40 border rounded-xl py-3 pl-12 pr-4 text-white placeholder:text-slate-600 focus:outline-none focus:ring-1 transition-all font-body-sm ${confirmPassword.length > 0 ? (passwordsMatch ? 'border-green-500/50 focus:border-green-500/50 focus:ring-green-500/50' : 'border-error/50 focus:border-error/50 focus:ring-error/50') : 'border-white/10 focus:border-primary/50 focus:ring-primary/50'}`}
                       placeholder="••••••••"
                       required={!isLogin}
+                      disabled={submitting}
                     />
                   </div>
                 </div>
@@ -189,14 +271,21 @@ export default function AuthPage() {
 
             <button 
               type="submit" 
-              disabled={isLogin ? !isValidLogin : !isValidSignup}
-              className={`w-full py-4 rounded-xl font-bold uppercase tracking-widest text-[12px] transition-all shadow-lg mt-4 ${
-                (isLogin ? isValidLogin : isValidSignup) 
+              disabled={(isLogin ? !isValidLogin : !isValidSignup) || submitting}
+              className={`w-full py-4 rounded-xl font-bold uppercase tracking-widest text-[12px] transition-all shadow-lg mt-4 flex items-center justify-center gap-2 ${
+                (isLogin ? isValidLogin : isValidSignup) && !submitting
                   ? 'bg-primary hover:bg-primary-fixed text-on-primary shadow-primary/20 cursor-pointer' 
                   : 'bg-white/5 text-slate-500 border border-white/5 cursor-not-allowed'
               }`}
             >
-              {isLogin ? "Authenticate" : "Initialize Profile"}
+              {submitting && (
+                <span className="w-4 h-4 border-2 border-current border-t-transparent rounded-full animate-spin" />
+              )}
+              {submitting
+                ? "Authenticating…"
+                : isLogin
+                ? "Authenticate"
+                : "Initialize Profile"}
             </button>
           </form>
 
@@ -211,7 +300,8 @@ export default function AuthPage() {
 
           <button 
             onClick={handleGoogleAuth}
-            className="w-full mt-6 bg-white hover:bg-slate-100 text-black py-3.5 rounded-xl font-bold text-[13px] flex items-center justify-center gap-3 transition-colors shadow-lg"
+            disabled={submitting}
+            className="w-full mt-6 bg-white hover:bg-slate-100 text-black py-3.5 rounded-xl font-bold text-[13px] flex items-center justify-center gap-3 transition-colors shadow-lg disabled:opacity-60"
           >
             <svg width="18" height="18" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
               <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
